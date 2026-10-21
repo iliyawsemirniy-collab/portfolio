@@ -1,0 +1,278 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Илья — монтаж</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+@font-face{font-family:Gilroy;src:url(fonts/Gilroy-Medium.ttf) format('truetype');font-weight:500;font-display:swap}
+@font-face{font-family:Gilroy;src:url(fonts/Gilroy-Bold.ttf) format('truetype');font-weight:700;font-display:swap}
+@font-face{font-family:Gilroy;src:url(fonts/Gilroy-Heavy.ttf) format('truetype');font-weight:900;font-display:swap}
+:root{
+  --bg:#07090c; --ink:#e9edf2; --dim:#8a95a1; --mute:#5c6773; --line:rgba(255,255,255,.09);
+  --glass:rgba(14,18,24,.58); --glass2:rgba(24,29,37,.75);
+  --warm:#ffb37a; --cold:#82aaff; --red:#ff4d4d;
+  --disp:'Gilroy',-apple-system,system-ui,sans-serif; --mono:'JetBrains Mono',ui-monospace,Menlo,monospace;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--ink);font-family:var(--disp);font-weight:500;overflow-x:hidden;-webkit-font-smoothing:antialiased}
+a{color:inherit}
+.wrap{width:min(1240px,100% - 32px);margin:0 auto}
+.grain{position:fixed;inset:-50%;z-index:50;pointer-events:none;opacity:.07;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence baseFrequency='.85' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  animation:grain 1s steps(6) infinite}
+@keyframes grain{0%{transform:translate(0,0)}25%{transform:translate(-3%,2%)}50%{transform:translate(2%,-3%)}75%{transform:translate(-2%,-1%)}100%{transform:translate(1%,3%)}}
+
+/* HERO */
+.hero{position:relative;min-height:100svh;display:grid;align-items:center;overflow:hidden;isolation:isolate}
+.hero video.bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:-3;filter:saturate(.6) contrast(1.12) brightness(.62) hue-rotate(-10deg)}
+.hero::before{content:"";position:absolute;inset:0;z-index:-2;
+  background:linear-gradient(90deg,rgba(5,7,11,.88) 0,rgba(5,7,11,.55) 38%,rgba(5,7,11,.15) 70%,rgba(5,7,11,.5) 100%),
+             radial-gradient(120% 90% at 60% 40%,transparent 0,rgba(4,7,12,.5) 60%,rgba(4,6,10,.95) 100%),
+             linear-gradient(180deg,rgba(10,22,38,.35),rgba(7,9,12,.2) 40%,var(--bg) 100%)}
+.hero .wrap{display:grid;grid-template-columns:1.05fr .95fr;gap:48px;align-items:center;padding:96px 0 72px}
+.tag{font:500 12px var(--mono);display:inline-flex;gap:10px;align-items:center;letter-spacing:.14em;text-transform:uppercase;color:var(--dim)}
+.tag i{width:8px;height:8px;border-radius:50%;background:var(--red);box-shadow:0 0 12px var(--red);animation:rec 1.4s infinite}
+@keyframes rec{50%{opacity:.25}}
+h1{font-weight:900;font-size:clamp(56px,9.4vw,136px);line-height:.88;letter-spacing:-.035em;margin:22px 0 24px}
+h1 span{display:block;font-size:.62em;font-weight:500;letter-spacing:-.02em;margin-top:.12em;background:linear-gradient(90deg,rgba(233,237,242,.42),var(--warm));-webkit-background-clip:text;background-clip:text;color:transparent}
+.lead{font-size:clamp(16px,1.5vw,20px);line-height:1.55;color:#bcc5cf;max-width:540px}
+.lead b{color:var(--warm);font-weight:700}
+.cta{display:flex;gap:12px;margin-top:32px;flex-wrap:wrap}
+.btn{font:700 15px var(--disp);padding:14px 20px;border-radius:10px;border:1px solid var(--line);background:rgba(255,255,255,.04);text-decoration:none;display:inline-flex;gap:10px;align-items:center;transition:.2s;backdrop-filter:blur(8px)}
+.btn:hover{border-color:rgba(255,179,122,.5);background:rgba(255,179,122,.08)}
+.btn.main{background:var(--ink);color:#0a0d12;border-color:var(--ink)}
+.btn.main:hover{background:#fff}
+
+/* glass panel — timeline */
+.panel{background:var(--glass);border:1px solid rgba(255,255,255,.12);border-radius:16px;backdrop-filter:blur(18px) saturate(1.2);-webkit-backdrop-filter:blur(18px) saturate(1.2);box-shadow:0 30px 80px rgba(0,0,0,.55),inset 0 1px 0 rgba(255,255,255,.06);overflow:hidden}
+.ph{display:flex;align-items:center;gap:10px;padding:13px 16px;border-bottom:1px solid var(--line);font:500 12.5px var(--mono);color:#aab4bf}
+.ph .dot{width:8px;height:8px;border-radius:50%;background:var(--red);box-shadow:0 0 10px var(--red);animation:rec 1.4s infinite}
+.ph .tc{margin-left:auto;color:var(--ink);letter-spacing:.06em}
+.tl{position:relative;padding:18px 16px 16px 52px}
+.ruler{display:flex;justify-content:space-between;font:400 10px var(--mono);color:var(--mute);margin-bottom:10px}
+.track{position:relative;height:34px;margin-bottom:8px;border-radius:6px;background:rgba(255,255,255,.025)}
+.track.a{height:26px}
+.track b{position:absolute;left:-40px;top:50%;transform:translateY(-50%);font:500 10.5px var(--mono);color:var(--mute)}
+.clip{position:absolute;top:3px;bottom:3px;border-radius:5px;border:1px solid rgba(255,255,255,.14);overflow:hidden}
+.clip.v{background:linear-gradient(180deg,rgba(130,170,255,.32),rgba(130,170,255,.14))}
+.clip.g{background:linear-gradient(180deg,rgba(255,179,122,.38),rgba(255,179,122,.16))}
+.clip.t{background:linear-gradient(180deg,rgba(199,146,234,.36),rgba(199,146,234,.14))}
+.clip.au{background:rgba(127,219,160,.12);border-color:rgba(127,219,160,.25)}
+.clip.au:after{content:"";position:absolute;inset:4px 4px;background:repeating-linear-gradient(90deg,rgba(127,219,160,.55) 0 2px,transparent 2px 5px);
+  -webkit-mask:linear-gradient(180deg,transparent 0,#000 30%,#000 70%,transparent 100%)}
+.clip span{position:absolute;left:7px;top:50%;transform:translateY(-50%);font:500 10px var(--mono);color:rgba(255,255,255,.75);white-space:nowrap}
+.playhead{position:absolute;top:30px;bottom:12px;left:52px;width:2px;background:var(--red);box-shadow:0 0 12px var(--red);animation:play 9s linear infinite}
+.playhead:before{content:"";position:absolute;top:-6px;left:-5px;border:6px solid transparent;border-top-color:var(--red)}
+@keyframes play{from{left:52px}to{left:calc(100% - 18px)}}
+.pf{display:flex;gap:8px;flex-wrap:wrap;padding:12px 16px 14px;border-top:1px solid var(--line)}
+.pill{font:500 11.5px var(--mono);color:#c9d1da;padding:6px 10px;border-radius:999px;border:1px solid var(--line);background:rgba(255,255,255,.03)}
+
+/* STATS */
+.stats{margin-top:-24px;position:relative;z-index:2}
+.stats .panel{display:grid;grid-template-columns:repeat(3,1fr)}
+.stat{padding:24px;border-right:1px solid var(--line)}
+.stat:last-child{border-right:0}
+.stat small{display:block;color:var(--dim);font-size:13px;margin-bottom:8px}
+.stat b{font-size:clamp(24px,3vw,40px);font-weight:900;letter-spacing:-.02em}
+.stat b.sm{font-size:clamp(18px,2vw,26px);font-weight:700}
+
+/* WORKS */
+section{padding:110px 0 0}
+.sh{display:flex;align-items:end;justify-content:space-between;gap:24px;margin-bottom:28px;flex-wrap:wrap}
+h2{font-weight:900;font-size:clamp(34px,4.6vw,60px);letter-spacing:-.03em;line-height:1}
+h2 small{display:block;font-size:15px;font-weight:500;letter-spacing:0;color:var(--dim);margin-bottom:12px}
+h3{font-weight:900;font-size:clamp(24px,2.6vw,34px);letter-spacing:-.02em;margin:56px 0 18px}
+.tabs{display:flex;gap:2px;background:rgba(255,255,255,.03);border:1px solid var(--line);border-radius:12px;padding:4px;overflow-x:auto;scrollbar-width:none;max-width:100%}
+.tab{font:700 14px var(--disp);color:var(--dim);background:none;border:0;padding:10px 16px;border-radius:8px;cursor:pointer;white-space:nowrap}
+.tab[aria-selected=true]{background:var(--glass2);color:var(--ink);box-shadow:inset 0 0 0 1px rgba(255,255,255,.08)}
+.grid{display:grid;grid-template-columns:repeat(12,1fr);grid-auto-rows:clamp(170px,16vw,236px);grid-auto-flow:dense;gap:16px}
+.vgrid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+.card{position:relative;border-radius:14px;overflow:hidden;background:#0d1117;border:1px solid var(--line);cursor:pointer;grid-column:span 4;transition:transform .35s cubic-bezier(.2,.8,.2,1),border-color .3s}
+.card.big{grid-column:span 8;grid-row:span 2}
+.vgrid .card{aspect-ratio:9/16;grid-column:auto;grid-row:auto}
+.card:hover{transform:translateY(-4px);border-color:rgba(255,179,122,.45)}
+.card img,.card video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:opacity .4s}
+.card img{filter:saturate(.8) brightness(.82)}
+.card video{opacity:0}
+.card.play video{opacity:1}.card.play img{opacity:0}
+.card:after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,0) 45%,rgba(4,6,10,.92));pointer-events:none}
+.meta{position:absolute;left:0;right:0;bottom:0;padding:16px;z-index:2}
+.meta .t{font-weight:700;font-size:clamp(15px,1.3vw,18px);line-height:1.25;text-wrap:balance}
+.card.big .meta .t{font-size:clamp(18px,2vw,26px)}
+.chips{position:absolute;top:12px;left:12px;right:12px;z-index:2;display:flex;justify-content:space-between;gap:8px}
+.chip{font:500 11px var(--mono);padding:5px 8px;border-radius:6px;background:rgba(7,9,12,.7);backdrop-filter:blur(6px);border:1px solid var(--line);color:#d4dbe3}
+.chip.n{color:var(--warm)}
+.soon{grid-column:1/-1;padding:44px 28px;border:1px dashed rgba(255,255,255,.16);border-radius:14px;color:var(--dim);font-size:17px;line-height:1.6}
+
+/* NICHES */
+.niches{display:flex;flex-wrap:wrap;gap:10px}
+.niche{font-weight:700;font-size:clamp(15px,1.4vw,19px);padding:14px 20px;border-radius:999px;border:1px solid var(--line);background:rgba(255,255,255,.03);transition:.25s}
+.niche:hover{border-color:rgba(255,179,122,.5);color:var(--warm)}
+
+/* CONTACT */
+.contact{padding:150px 0 90px}
+.contact h2{font-size:clamp(44px,8vw,112px)}
+.contact h2 a{text-decoration:none;background:linear-gradient(90deg,var(--ink),var(--warm));-webkit-background-clip:text;background-clip:text;color:transparent}
+footer{border-top:1px solid var(--line);padding:22px 0 30px;color:var(--mute);font-size:13px;display:flex;justify-content:space-between}
+
+/* MODAL */
+.modal{position:fixed;inset:0;z-index:40;display:none;place-items:center;background:rgba(3,5,8,.84);backdrop-filter:blur(10px);padding:16px}
+.modal.on{display:grid}
+.modal .panel{width:min(1100px,100%)}
+.modal .panel.v{width:min(440px,100%)}
+.frame{position:relative;background:#000;aspect-ratio:16/9}
+.modal .panel.v .frame{aspect-ratio:9/16;max-height:78vh;margin:0 auto}
+.frame video{position:absolute;inset:0;width:100%;height:100%;background:#000}
+.x{margin-left:auto;background:none;border:0;color:var(--ink);font:500 12.5px var(--mono);cursor:pointer;opacity:.7}
+
+.reveal{opacity:0;transform:translateY(24px);transition:opacity .8s,transform .8s cubic-bezier(.2,.8,.2,1)}
+.reveal.in{opacity:1;transform:none}
+@media (max-width:900px){
+  .hero .wrap{grid-template-columns:1fr;gap:32px;padding:84px 0 56px}
+  .stats .panel{grid-template-columns:1fr}
+  .stat{border-right:0;border-bottom:1px solid var(--line)}.stat:last-child{border-bottom:0}
+  .grid{grid-auto-rows:210px;gap:12px}
+  .card,.card.big{grid-column:span 12;grid-row:span 1}
+  .vgrid{grid-template-columns:1fr 1fr;gap:12px}
+}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+<div class="grain"></div>
+
+<header class="hero">
+  <video class="bg" src="media/showreel.mp4" poster="media/showreel.jpg" autoplay muted loop playsinline></video>
+  <div class="wrap">
+    <div>
+      <div class="tag"><i></i>rec · монтаж · моушн · конвертеры</div>
+      <h1>Илья<span>монтажёр</span></h1>
+      <p class="lead"><b>4 года в монтаже.</b> Подкасты, говорящие головы, курсы, рилсы, конвертеры и переводы роликов на 12 языков — для врачей, инфобиза и экспертов из любых ниш. Монтаж, который <b>досматривают до конца</b>.</p>
+      <div class="cta">
+        <a class="btn main" href="#works">▶ смотреть работы</a>
+        <a class="btn" href="https://t.me/Ilushkaxr" target="_blank" rel="noopener">написать в Telegram ↗</a>
+      </div>
+    </div>
+    <div class="panel" aria-hidden="true">
+      <div class="ph"><span class="dot"></span>timeline · final_cut_v7<span class="tc" id="tc">00:00:00:00</span></div>
+      <div class="tl">
+        <div class="ruler"><span>00:00</span><span>00:15</span><span>00:30</span><span>00:45</span><span>01:00</span></div>
+        <div class="track"><b>V3</b><div class="clip t" style="left:8%;width:18%"><span>титр</span></div><div class="clip t" style="left:47%;width:14%"><span>хук</span></div><div class="clip t" style="left:78%;width:16%"><span>CTA</span></div></div>
+        <div class="track"><b>V2</b><div class="clip g" style="left:20%;width:22%"><span>графика</span></div><div class="clip g" style="left:60%;width:12%"><span>zoom</span></div></div>
+        <div class="track"><b>V1</b><div class="clip v" style="left:0;width:31%"><span>cam_A</span></div><div class="clip v" style="left:32%;width:21%"><span>cam_B</span></div><div class="clip v" style="left:54%;width:26%"><span>cam_A</span></div><div class="clip v" style="left:81%;width:19%"><span>общий</span></div></div>
+        <div class="track a"><b>A1</b><div class="clip au" style="left:0;width:100%"></div></div>
+        <div class="track a"><b>A2</b><div class="clip au" style="left:6%;width:36%"></div><div class="clip au" style="left:52%;width:45%"></div></div>
+        <div class="playhead"></div>
+      </div>
+      <div class="pf"><span class="pill">DaVinci Resolve</span><span class="pill">Premiere Pro</span><span class="pill">After Effects</span></div>
+    </div>
+  </div>
+</header>
+
+<div class="stats wrap reveal">
+  <div class="panel">
+    <div class="stat"><small>в монтаже</small><b>4 года</b></div>
+    <div class="stat"><small>ниши</small><b>любые</b></div>
+    <div class="stat"><small>софт</small><b class="sm">DaVinci · Premiere · After Effects</b></div>
+  </div>
+</div>
+
+<main>
+<section id="works" class="wrap">
+  <div class="sh reveal">
+    <h2><small>наведи — оживёт, нажми — смотри</small>Работы</h2>
+    <div class="tabs" role="tablist" id="tabs"></div>
+  </div>
+  <div class="grid" id="grid"></div>
+  <h3 id="vh">Рилсы</h3>
+  <div class="vgrid" id="vgrid"></div>
+</section>
+
+<section class="wrap reveal">
+  <div class="sh"><h2><small>монтирую в любой нише</small>Ниши</h2></div>
+  <div class="niches" id="niches"></div>
+</section>
+
+<section class="wrap contact reveal">
+  <h2><small>есть задача — напиши</small><a href="https://t.me/Ilushkaxr" target="_blank" rel="noopener">@Ilushkaxr ↗</a></h2>
+</section>
+</main>
+
+<footer class="wrap"><span>Илья · монтаж</span><span>© 2026</span></footer>
+
+<div class="modal" id="modal" role="dialog" aria-modal="true">
+  <div class="panel" id="mp">
+    <div class="ph"><span class="dot"></span><span id="mt"></span><button class="x" id="mx">esc ✕</button></div>
+    <div class="frame" id="mf"></div>
+  </div>
+</div>
+
+<script src="data.js"></script>
+<script>
+const W = window.WORKS;
+const nb = s => s.replace(/(^|[\s«(])([А-Яа-яЁёA-Za-z]{1,3}|—|–)\s/g,'$1$2\u00a0').replace(/\s(—|–)/g,'\u00a0$1');
+const dur = s => s ? Math.floor(s/60)+':'+String(s%60).padStart(2,'0') : '';
+
+/* running timecode */
+const tc=document.getElementById('tc'); const t0=performance.now();
+(function f(){const s=(performance.now()-t0)/1000, fr=Math.floor((s%1)*30), p=n=>String(n).padStart(2,'0');
+  tc.textContent=`00:${p(Math.floor(s/60)%60)}:${p(Math.floor(s)%60)}:${p(fr)}`; requestAnimationFrame(f)})();
+
+/* tabs */
+const TABS=[
+  {n:'Все',t:()=>true},
+  {n:'Говорящая голова',t:w=>w.tags.includes('head')},
+  {n:'Курсы',t:w=>w.tags.includes('course')},
+  {n:'Конвертеры',t:w=>w.tags.includes('conv')},
+  {n:'Переводы',t:w=>w.tags.includes('translate')},
+  {n:'Подкасты',t:w=>w.tags.includes('podcast')},
+  {n:'Рилсы',t:w=>w.kind==='reels'},
+];
+const tabs=document.getElementById('tabs'),grid=document.getElementById('grid'),vgrid=document.getElementById('vgrid'),vh=document.getElementById('vh');
+TABS.forEach((t,i)=>{const b=document.createElement('button');b.className='tab';b.role='tab';b.setAttribute('aria-selected',i===0);b.textContent=t.n;
+  b.onclick=()=>{[...tabs.children].forEach(x=>x.setAttribute('aria-selected',x===b));draw(t)};tabs.appendChild(b)});
+
+function card(w,big){
+  const d=document.createElement('article'); d.className='card'+(big?' big':'');
+  d.innerHTML=`<img loading="lazy" src="${w.poster}" alt=""><video muted loop playsinline preload="none" src="${w.src}"></video>
+    <div class="chips"><span class="chip n">${w.niche}</span><span class="chip">${dur(w.dur)}</span></div>
+    <div class="meta"><div class="t">${nb(w.title)}</div></div>`;
+  const v=d.querySelector('video');
+  d.onmouseenter=()=>{d.classList.add('play');v.play().catch(()=>{})};
+  d.onmouseleave=()=>{d.classList.remove('play');v.pause()};
+  d.onclick=()=>open(w); return d;
+}
+let io;
+function draw(t){
+  grid.innerHTML='';vgrid.innerHTML='';
+  const list=W.filter(t.t), hor=list.filter(w=>w.kind!=='reels'), ver=list.filter(w=>w.kind==='reels');
+  hor.forEach((w,i)=>grid.appendChild(card(w,i%5===0)));
+  ver.forEach(w=>vgrid.appendChild(card(w)));
+  grid.style.display=hor.length?'':'none';
+  vh.style.display=(ver.length&&hor.length)?'':'none';
+  if(matchMedia('(hover:none)').matches){io&&io.disconnect();
+    io=new IntersectionObserver(es=>es.forEach(e=>{const c=e.target,v=c.querySelector('video');if(e.isIntersecting){c.classList.add('play');v.play().catch(()=>{})}else{c.classList.remove('play');v.pause()}}),{threshold:.6});
+    document.querySelectorAll('.card').forEach(c=>io.observe(c))}
+}
+draw(TABS[0]);
+
+/* niches */
+['Медицина','Инфобиз','Подкасты','Говорящая голова','Курсы','Рилсы','Конвертеры','Переводы на 12 языков','Йога','Ивенты','Фитнес','Сад и огород','Детское образование','Бизнес']
+  .forEach(n=>{const s=document.createElement('span');s.className='niche';s.textContent=n;document.getElementById('niches').appendChild(s)});
+
+/* modal */
+const M=document.getElementById('modal'),mf=document.getElementById('mf'),mp=document.getElementById('mp');
+function open(w){mp.className='panel'+(w.kind==='reels'?' v':'');mf.innerHTML=`<video src="${w.full}" controls autoplay playsinline></video>`;document.getElementById('mt').textContent=w.title;M.classList.add('on')}
+function close(){M.classList.remove('on');mf.innerHTML=''}
+document.getElementById('mx').onclick=close;M.onclick=e=>{if(e.target===M)close()};addEventListener('keydown',e=>{if(e.key==='Escape')close()});
+
+/* reveal */
+const ro=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');ro.unobserve(e.target)}}),{threshold:.15});
+document.querySelectorAll('.reveal').forEach(x=>ro.observe(x));
+</script>
+</body>
+</html>
