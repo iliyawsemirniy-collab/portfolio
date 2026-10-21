@@ -91,6 +91,7 @@ h3{font-weight:900;font-size:clamp(24px,2.6vw,34px);letter-spacing:-.02em;margin
 .tab[aria-selected=true]{background:var(--glass2);color:var(--ink);box-shadow:inset 0 0 0 1px rgba(255,255,255,.08)}
 .grid{display:grid;grid-template-columns:repeat(12,1fr);grid-auto-rows:clamp(170px,16vw,236px);grid-auto-flow:dense;gap:16px}
 .vgrid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+.wb{display:flex;flex-direction:column;gap:16px}
 .card{position:relative;border-radius:14px;overflow:hidden;background:#0d1117;border:1px solid var(--line);cursor:pointer;grid-column:span 4;transition:transform .35s cubic-bezier(.2,.8,.2,1),border-color .3s}
 .card.big{grid-column:span 8;grid-row:span 2}
 .vgrid .card{aspect-ratio:9/16;grid-column:auto;grid-row:auto}
@@ -187,9 +188,7 @@ footer{border-top:1px solid var(--line);padding:22px 0 30px;color:var(--mute);fo
     <h2><small>наведи — оживёт, нажми — смотри</small>Работы</h2>
     <div class="tabs" role="tablist" id="tabs"></div>
   </div>
-  <div class="grid" id="grid"></div>
-  <h3 id="vh">Рилсы</h3>
-  <div class="vgrid" id="vgrid"></div>
+  <div class="wb" id="wb"></div>
 </section>
 
 <section class="wrap reveal">
@@ -232,7 +231,7 @@ const TABS=[
   {n:'Подкасты',t:w=>w.tags.includes('podcast')},
   {n:'Рилсы',t:w=>w.kind==='reels'},
 ];
-const tabs=document.getElementById('tabs'),grid=document.getElementById('grid'),vgrid=document.getElementById('vgrid'),vh=document.getElementById('vh');
+const tabs=document.getElementById('tabs'),wb=document.getElementById('wb');
 TABS.forEach((t,i)=>{const b=document.createElement('button');b.className='tab';b.role='tab';b.setAttribute('aria-selected',i===0);b.textContent=t.n;
   b.onclick=()=>{[...tabs.children].forEach(x=>x.setAttribute('aria-selected',x===b));draw(t)};tabs.appendChild(b)});
 
@@ -247,15 +246,18 @@ function card(w,big){
   d.onclick=()=>open(w); return d;
 }
 let io;
+function block(cls,items,bigFirst){const g=document.createElement('div');g.className=cls;items.forEach((w,i)=>g.appendChild(card(w,bigFirst&&i===0)));wb.appendChild(g)}
 function draw(t){
-  grid.innerHTML='';vgrid.innerHTML='';
+  wb.innerHTML='';
   const list=W.filter(t.t), hor=list.filter(w=>w.kind!=='reels'), ver=list.filter(w=>w.kind==='reels');
-  hor.forEach((w,i)=>grid.appendChild(card(w,i%5===0)));
-  ver.forEach(w=>vgrid.appendChild(card(w)));
-  grid.style.display=hor.length?'':'none';
-  vh.style.display=(ver.length&&hor.length)?'':'none';
+  // горизонтальные блоками по 3 (большой + 2), между ними ряд из 4 рилсов
+  let h=0,v=0,k=0;
+  while(h<hor.length||v<ver.length){
+    if(h<hor.length){block('grid',hor.slice(h,h+3),k%2===0);h+=3;k++}
+    if(v<ver.length){block('vgrid',ver.slice(v,v+4));v+=4}
+  }
   if(matchMedia('(hover:none)').matches){io&&io.disconnect();
-    io=new IntersectionObserver(es=>es.forEach(e=>{const c=e.target,v=c.querySelector('video');if(e.isIntersecting){c.classList.add('play');v.play().catch(()=>{})}else{c.classList.remove('play');v.pause()}}),{threshold:.6});
+    io=new IntersectionObserver(es=>es.forEach(e=>{const c=e.target,vd=c.querySelector('video');if(e.isIntersecting){c.classList.add('play');vd.play().catch(()=>{})}else{c.classList.remove('play');vd.pause()}}),{threshold:.6});
     document.querySelectorAll('.card').forEach(c=>io.observe(c))}
 }
 draw(TABS[0]);
