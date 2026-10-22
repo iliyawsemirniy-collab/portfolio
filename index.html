@@ -113,7 +113,7 @@ h3{font-weight:900;font-size:clamp(24px,2.6vw,34px);letter-spacing:-.02em;margin
 .soon{grid-column:1/-1;padding:44px 28px;border:1px dashed rgba(255,255,255,.16);border-radius:14px;color:var(--dim);font-size:17px;line-height:1.6}
 
 /* SPEAKERS */
-.speakers{display:grid;grid-template-columns:repeat(5,1fr);gap:38px 18px;max-width:1000px}
+.speakers{display:grid;grid-template-columns:repeat(7,1fr);gap:38px 14px}
 .sp{display:flex;flex-direction:column;align-items:center;text-align:center;gap:0}
 .ring{width:132px;aspect-ratio:1;max-width:100%;border-radius:50%;padding:4px;background:conic-gradient(from 210deg,var(--red),var(--warm),#ffd37a,var(--red));transition:transform .35s cubic-bezier(.2,.8,.2,1)}
 .ring img{display:block;width:100%;height:100%;border-radius:50%;object-fit:cover;border:4px solid var(--bg);background:#111}
@@ -163,9 +163,9 @@ footer{border-top:1px solid var(--line);padding:22px 0 30px;color:var(--mute);fo
   <video class="bg" src="media/showreel.mp4" poster="media/showreel.jpg" autoplay muted loop playsinline></video>
   <div class="wrap">
     <div>
-      <div class="tag"><i></i>rec · монтаж · моушн · конвертеры</div>
+      <div class="tag"><i></i>rec · монтаж · моушн · продающие ролики</div>
       <h1>Илья<span>монтажёр</span></h1>
-      <p class="lead"><b>4 года в монтаже.</b> Подкасты, говорящие головы, курсы, рилсы, конвертеры и переводы роликов на 12 языков — для врачей, инфобиза и экспертов из любых ниш. Монтаж, который <b>досматривают до конца</b>.</p>
+      <p class="lead"><b>4 года в монтаже.</b> Подкасты, говорящие головы, курсы, рилсы, продающие ролики и переводы роликов на 12 языков — для врачей, инфобиза и экспертов из любых ниш. Монтаж, который <b>досматривают до конца</b>.</p>
       <div class="cta">
         <a class="btn main" href="#works">▶ смотреть работы</a>
         <a class="btn tg" href="https://t.me/Ilushkaxr?text=%D0%9F%D1%80%D0%B8%D0%B2%D0%B5%D1%82%2C%20%D0%98%D0%BB%D1%8C%D1%8F%21%20%F0%9F%91%8B%20%D0%A5%D0%BE%D1%87%D1%83%20%D0%BE%D0%B1%D1%81%D1%83%D0%B4%D0%B8%D1%82%D1%8C%20%D0%BC%D0%BE%D0%BD%D1%82%D0%B0%D0%B6%20%D0%B4%D0%BB%D1%8F%20%D1%81%D0%B2%D0%BE%D0%B5%D0%B3%D0%BE%20%D0%BF%D1%80%D0%BE%D0%B5%D0%BA%D1%82%D0%B0.%20%D0%9E%D0%BF%D0%B8%D1%88%D1%83%20%D0%B7%D0%B0%D0%B4%D0%B0%D1%87%D1%83%20%D0%B8%20%D1%81%D0%BA%D0%B8%D0%BD%D1%83%20%D0%B8%D1%81%D1%85%D0%BE%D0%B4%D0%BD%D0%B8%D0%BA%D0%B8%20%E2%80%94%20%D0%BF%D0%BE%D0%B4%D1%81%D0%BA%D0%B0%D0%B6%D0%B5%D1%88%D1%8C%20%D1%81%D1%82%D0%BE%D0%B8%D0%BC%D0%BE%D1%81%D1%82%D1%8C%20%D0%B8%20%D1%81%D1%80%D0%BE%D0%BA%D0%B8%3F" target="_blank" rel="noopener">узнать подробности и стоимость ↗</a>
@@ -246,7 +246,7 @@ const TABS=[
   {n:'Все',t:()=>true},
   {n:'Говорящая голова',t:w=>w.tags.includes('head')},
   {n:'Курсы',t:w=>w.tags.includes('course')},
-  {n:'Конвертеры',t:w=>w.tags.includes('conv')},
+  {n:'Продающие ролики',t:w=>w.tags.includes('conv')},
   {n:'Переводы',t:w=>w.tags.includes('translate')},
   {n:'Подкасты',t:w=>w.tags.includes('podcast')},
   {n:'Рилсы',t:w=>w.kind==='reels'},
@@ -283,11 +283,11 @@ function draw(t){
 draw(TABS[0]);
 
 /* speakers */
-[['chernonog','Станислав Черноног','Спикер'],['lebedeva','Диляра Лебедева','Гость подкаста'],['tolstyakov','Дмитрий Толстяков','Гость подкаста'],['shamil','Шамиль Ахмадуллин','Спикер'],['terushkin','Роман Терушкин','Спикер'],['ero','Татьяна Бисэри','Спикер'],['larisa','Лариса Семенова','Спикер'],['kochkin','Павел Кочкин','Спикер'],['sidorenko','Владимир Сидоренко','Спикер'],['masgutov','Руслан Масгутов','Гость подкаста'],['sad','Дмитрий Звонка','Спикер'],['gvalov','Артём Гвалов','Спикер'],['anya','Анна Русанова','Спикер'],['rft','RFT','Подкаст'],['infocast','ИНФОКАСТ','Подкаст']]
+[['chernonog','Станислав Черноног','Спикер'],['lebedeva','Диляра Лебедева','Гость подкаста'],['tolstyakov','Дмитрий Толстяков','Гость подкаста'],['shamil','Шамиль Ахмадуллин','Спикер'],['terushkin','Роман Терушкин','Спикер'],['ero','Татьяна Бисэри','Спикер'],['larisa','Лариса Семенова','Спикер'],['kochkin','Павел Кочкин','Спикер'],['masgutov','Руслан Масгутов','Гость подкаста'],['sad','Дмитрий Звонка','Спикер'],['gvalov','Артём Гвалов','Спикер'],['anya','Анна Русанова','Спикер'],['rft','RFT','Подкаст'],['infocast','ИНФОКАСТ','Подкаст']]
   .forEach(([k,n,l])=>{const d=document.createElement('div');d.className='sp';d.innerHTML=`<div class="ring"><img loading="lazy" src="media/sp/${k}.jpg" alt="${n}"></div><span class="lab">${l}</span><span class="nm">${n}</span>`;document.getElementById('speakers').appendChild(d)});
 
 /* niches */
-['Медицина','Инфобиз','Подкасты','Говорящая голова','Курсы','Рилсы','Конвертеры','Переводы на 12 языков','Йога','Ивенты','Фитнес','Сад и огород','Детское образование','Бизнес']
+['Медицина','Инфобиз','Подкасты','Говорящая голова','Курсы','Рилсы','Продающие ролики','Переводы на 12 языков','Йога','Ивенты','Фитнес','Сад и огород','Детское образование','Бизнес']
   .forEach(n=>{const s=document.createElement('span');s.className='niche';s.textContent=n;document.getElementById('niches').appendChild(s)});
 
 /* modal */
