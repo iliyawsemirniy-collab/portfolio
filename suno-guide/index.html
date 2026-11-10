@@ -61,14 +61,14 @@ body::before{content:"";position:fixed;inset:0;z-index:-2;pointer-events:none;
 .hero .go:hover{transform:translateY(-2px)}
 .hero .go span{display:inline-block;animation:down 1.4s infinite}
 @keyframes down{50%{transform:translateY(4px)}}
-.mascot{position:relative;justify-self:center;width:min(440px,100%);margin:120px 0 -34px}
+.mascot{position:relative;justify-self:center;width:min(440px,100%);margin:170px 0 -34px}
 .mascot img{position:relative;z-index:1;width:100%;filter:drop-shadow(0 14px 18px rgba(0,0,0,.35));transform-origin:50% 100%;animation:bob 4.5s ease-in-out infinite}
 @keyframes bob{0%,100%{transform:rotate(-1deg) translateY(0)}50%{transform:rotate(1.2deg) translateY(-8px)}}
 .bubble{position:absolute;background:var(--cream);color:#1b1a14;font:700 clamp(26px,3vw,34px)/1 var(--hand);padding:14px 20px 16px;border-radius:22px;box-shadow:0 10px 30px rgba(0,0,0,.35);white-space:nowrap}
 .bubble::after{content:"";position:absolute;width:22px;height:22px;background:var(--cream);transform:rotate(45deg);border-radius:4px}
 .mascot .bubble{z-index:3;left:30%;top:-21%;transform:rotate(-6deg) scale(0);animation:pop .5s 1.3s cubic-bezier(.3,1.6,.5,1) forwards}
 .mascot .bubble::after{right:34px;bottom:-8px}
-.mascot .bubble{white-space:normal;width:max-content;max-width:300px;line-height:1.05}
+.mascot .bubble{white-space:normal;width:max-content;max-width:300px;line-height:1.05;top:auto!important;bottom:calc(100% + 4px)!important;left:auto!important;right:-4%!important}
 @keyframes pop{to{transform:rotate(-6deg) scale(1)}}
 .grass{position:absolute;left:0;right:0;bottom:-2px;height:70px;pointer-events:none}
 
@@ -199,7 +199,7 @@ footer .peek .fb::after{right:40px;bottom:-8px}
 
 @media (max-width:900px){
   .hero .wrap{grid-template-columns:1fr;align-items:center;padding-top:56px}
-  .mascot{width:min(300px,78vw);margin-top:90px}
+  .mascot{width:min(300px,78vw);margin-top:150px}
   .hero .go{margin:26px 0 30px}
   .route{grid-template-columns:repeat(2,1fr)}
   .styles,.fix,.vs{grid-template-columns:1fr}
