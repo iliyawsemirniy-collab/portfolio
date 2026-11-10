@@ -68,6 +68,7 @@ body::before{content:"";position:fixed;inset:0;z-index:-2;pointer-events:none;
 .bubble::after{content:"";position:absolute;width:22px;height:22px;background:var(--cream);transform:rotate(45deg);border-radius:4px}
 .mascot .bubble{z-index:3;left:30%;top:-21%;transform:rotate(-6deg) scale(0);animation:pop .5s 1.3s cubic-bezier(.3,1.6,.5,1) forwards}
 .mascot .bubble::after{right:34px;bottom:-8px}
+.mascot .bubble{white-space:normal;width:max-content;max-width:300px;line-height:1.05}
 @keyframes pop{to{transform:rotate(-6deg) scale(1)}}
 .grass{position:absolute;left:0;right:0;bottom:-2px;height:70px;pointer-events:none}
 
@@ -253,6 +254,12 @@ footer.in .peek{transform:translateY(8%)}
 .credits a{color:inherit}
 @media (max-width:1240px){.sticker{display:none}}
 @media (max-width:900px){.gallery{grid-template-columns:1fr 1fr;gap:18px 14px}.gallery figcaption{font-size:20px}}
+
+.aside{display:flex;gap:14px;align-items:flex-start;margin:22px 0;padding:14px 18px 16px 14px;background:var(--cream);color:#2a261d;border-radius:18px 18px 18px 4px;box-shadow:0 14px 34px rgba(0,0,0,.4);transform:rotate(-.6deg);max-width:640px}
+.aside img{width:46px;height:46px;border-radius:50%;flex:none}
+.aside .who{font:500 11px var(--mono);letter-spacing:.14em;text-transform:uppercase;color:#8a7a5c;display:block;margin-bottom:2px}
+.aside p{margin:0;font:700 23px/1.2 var(--hand)}
+.aside.r{margin-left:auto;transform:rotate(.6deg);border-radius:18px 18px 4px 18px}
 </style>
 </head>
 <body>
@@ -289,9 +296,9 @@ footer.in .peek{transform:translateY(8%)}
 </div>
 
 <section id="s1">
-  <figure class="sticker  rv"><img src="img/ph/63.jpg" alt="Сурок" loading="lazy"><figcaption>Режим Custom. Стоим ровно</figcaption></figure>
+  <figure class="sticker  rv"><img src="img/ph/63.jpg" alt="Сурок" loading="lazy"><figcaption>Режим Custom. Стою ровно, хотя мог бы лежать</figcaption></figure>
   <div class="wrap narrow">
-    <div class="head rv"><div class="big-n">01</div><div><h2>Делаем трек</h2><span class="say"><img src="img/surok_ava.png" alt="">«Только Custom, не спорим»</span></div></div>
+    <div class="head rv"><div class="big-n">01</div><div><h2>Делаем трек</h2><span class="say"><img src="img/surok_ava.png" alt="">«Только Custom. Simple — для тех, кто любит сюрпризы»</span></div></div>
     <p class="intro rv">Suno пишет музыку по описанию: вы говорите словами, какой нужен трек, а через минуту получаете два варианта. Для роликов нужна музыка <b>без голоса</b>, поэтому всё ниже про инструментальные треки.</p>
 
     <figure class="meme rv"><img src="img/2_knopki_simple_custom_all.jpg" alt="Мем: выбор между Simple и Custom" loading="lazy"><figcaption>спойлер: жмём Custom</figcaption></figure>
@@ -311,8 +318,10 @@ footer.in .peek{transform:translateY(8%)}
       <li class="rv"><span class="d">11</span><span class="what">Отметьте лучший</span>Поставьте лайк понравившемуся треку, чтобы не потерять его среди остальных.</li>
     </ol>
 
-    <figure class="meme r rv"><img src="img/3_gru_instrumental_all.jpg" alt="Мем: забыла включить Instrumental" loading="lazy"><figcaption>поэтому шаг 5 — самый важный</figcaption></figure>
+<div class="aside rv"><img src="img/surok_ava.png" alt=""><div><span class="who">сурок шепчет</span><p>Пропустите шаг 5 — и Suno споёт. Вы не хотите, чтобы Suno пел. Никто не хочет. Даже Suno.</p></div></div>
+    <figure class="meme r rv"><img src="img/3_gru_instrumental_all.jpg" alt="Мем: не включил Instrumental" loading="lazy"><figcaption>поэтому шаг 5 — самый важный</figcaption></figure>
 
+<div class="aside r rv"><img src="img/surok_ava.png" alt=""><div><span class="who">сурок шепчет</span><p>Первая генерация — как первый блин: технически еда, но показывать никому не надо.</p></div></div>
     <p class="rv"><b>Бонус для поля Lyrics.</b> Для музыки без голоса его можно не заполнять. Но если вписать план трека, музыка будет сначала нарастать, а потом «взрываться»:</p>
 <pre class="rv">[Intro]   <span class="c">спокойное начало</span>
 [Build]   <span class="c">нарастание</span>
@@ -322,10 +331,10 @@ footer.in .peek{transform:translateY(8%)}
 </section>
 
 <section id="s2">
-  <figure class="sticker l rv"><img src="img/ph/36.jpg" alt="Сурок" loading="lazy"><figcaption>Подбираю слова для Style</figcaption></figure>
+  <figure class="sticker l rv"><img src="img/ph/36.jpg" alt="Сурок" loading="lazy"><figcaption>Подбираю слова для Style. Я сурок, мне сложно</figcaption></figure>
   <div class="wrap">
     <div class="narrow">
-      <div class="head rv"><div class="big-n">02</div><div><h2>Готовые стили</h2><span class="say"><img src="img/surok_ava.png" alt="">«Скопируй и не мучайся»</span></div></div>
+      <div class="head rv"><div class="big-n">02</div><div><h2>Готовые стили</h2><span class="say"><img src="img/surok_ava.png" alt="">«Копируй. Мы не в школе, тут можно»</span></div></div>
       <p class="intro rv">Нажмите «Скопировать» и вставьте строку в поле Style целиком. Число с bpm — это темп: чем больше, тем быстрее музыка.</p>
     </div>
     <div class="group rv"><span class="gl">видео</span><h3>Тизеры, рилсы, истории</h3></div>
@@ -349,15 +358,16 @@ footer.in .peek{transform:translateY(8%)}
       <div class="style rv"><span class="lab">финал · расслабление</span><h3>Отдых в конце занятия</h3><code>relaxation, soft piano, gentle strings, slow, warm, 55 bpm, peaceful ending, minimal, emotional</code><div class="ex">Exclude: <code>vocals, drums</code></div><button class="copy">Скопировать</button></div>
     </div>
     <div class="note rv"><span class="ic">!</span><div><b>Для занятий делайте трек длинным.</b> Нажмите <span class="ui">Extend</span> 2–3 раза, чтобы музыки хватило на весь блок упражнений. Как это сделать, смотрите в разделе 03.</div></div>
+<div class="aside rv"><img src="img/surok_ava.png" alt=""><div><span class="who">сурок шепчет</span><p>Написать в Style «красивая музыка» — как сказать парикмахеру «сделайте красиво». Сделают. Вам не понравится.</p></div></div>
     <figure class="meme rv"><img src="img/5_brain_style.jpg" alt="Мем: как писать описание в поле Style" loading="lazy"><figcaption>чем точнее, тем умнее</figcaption></figure>
   </div>
 </section>
 
 <section id="s3">
-  <figure class="sticker  rv"><img src="img/ph/56.jpg" alt="Сурок" loading="lazy"><figcaption>Спорим, какой вариант лучше</figcaption></figure>
+  <figure class="sticker  rv"><img src="img/ph/56.jpg" alt="Сурок" loading="lazy"><figcaption>Оба варианта плохие, но спор принципиальный</figcaption></figure>
   <div class="wrap">
     <div class="narrow">
-      <div class="head rv"><div class="big-n">03</div><div><h2>Если почти нравится</h2><span class="say"><img src="img/surok_ava.png" alt="">«Не выбрасываем, докручиваем»</span></div></div>
+      <div class="head rv"><div class="big-n">03</div><div><h2>Если почти нравится</h2><span class="say"><img src="img/surok_ava.png" alt="">«Не выбрасывай. Его ещё можно спасти. Наверное»</span></div></div>
       <p class="intro rv">Все эти кнопки в меню трека: нажмите на три точки <span class="ui">⋯</span> рядом с ним. Пункты часто лежат в подменю <span class="ui">Remix/Edit</span> или <span class="ui">Create</span>.</p>
     </div>
     <div class="fix">
@@ -366,15 +376,16 @@ footer.in .peek{transform:translateY(8%)}
       <div class="rv"><div class="q">Нужен другой стиль?</div><p>Выберите <span class="ui">Cover</span>, впишите новый стиль и нажмите <span class="ui go">Create</span>. Мелодия останется похожей.</p></div>
       <div class="rv"><div class="q">Мелодия мешает голосу?</div><p>Выберите <span class="ui">Get Stems</span>: трек разложится на дорожки (барабаны, бас, мелодия), и в монтаже мелодию можно сделать тише.</p></div>
     </div>
+    <div class="narrow"><div class="aside r rv"><img src="img/surok_ava.png" alt=""><div><span class="who">сурок шепчет</span><p>Extend — это когда трек короткий, а планы на ролик большие. Жми, не стесняйся.</p></div></div></div>
     <div class="narrow"><div class="note rv"><span class="ic">i</span><div>Каждое такое действие создаёт <b>новый</b> трек в списке, исходный никуда не пропадает.</div></div></div>
     <figure class="meme r rv"><img src="img/4_boyfriend_generacii.jpg" alt="Мем: ещё одна генерация" loading="lazy"><figcaption>3–5 попыток достаточно, честно</figcaption></figure>
   </div>
 </section>
 
 <section id="s4">
-  <figure class="sticker l rv"><img src="img/ph/32.jpg" alt="Сурок" loading="lazy"><figcaption>Скачал один и доволен</figcaption></figure>
+  <figure class="sticker l rv"><img src="img/ph/32.jpg" alt="Сурок" loading="lazy"><figcaption>Скачал один. Доволен. Жую</figcaption></figure>
   <div class="wrap narrow">
-    <div class="head rv"><div class="big-n">04</div><div><h2>Скачать и передать</h2><span class="say"><img src="img/surok_ava.png" alt="">«Качаем только утверждённое»</span></div></div>
+    <div class="head rv"><div class="big-n">04</div><div><h2>Скачать и передать</h2><span class="say"><img src="img/surok_ava.png" alt="">«Качай одно. Ты не дракон, чтобы копить сокровища»</span></div></div>
     <ol class="steps">
       <li class="rv"><span class="d">1</span><span class="what">Откройте меню трека</span>Нажмите на три точки <span class="ui">⋯</span> рядом с выбранным треком.</li>
       <li class="rv"><span class="d">2</span><span class="what">Скачайте</span>Выберите <span class="ui">Download</span>, затем <span class="ui">WAV Audio</span>: у него лучшее качество. Если WAV нет, подойдёт MP3.</li>
@@ -382,15 +393,16 @@ footer.in .peek{transform:translateY(8%)}
       <li class="rv"><span class="d">4</span><span class="what">Отправьте</span>Пришлите файл монтажёру или заказчику, либо положите в общую папку проекта.</li>
     </ol>
     <div class="note rv"><span class="ic">!</span><div><b>Сначала согласовать?</b> Скачивать не нужно: в меню <span class="ui">⋯</span> выберите <span class="ui">Share</span> → <span class="ui">Copy Link</span> и пришлите ссылку. По ней трек слушается прямо в браузере.</div></div>
+<div class="aside rv"><img src="img/surok_ava.png" alt=""><div><span class="who">сурок шепчет</span><p>Лимит скачиваний — как зарплата: кажется, что много, пока не наступит пятнадцатое число.</p></div></div>
     <figure class="meme rv"><img src="img/6_fine_limit.jpg" alt="Мем: лимит скачиваний закончился" loading="lazy"><figcaption>скачиваний в месяц ограниченное число</figcaption></figure>
   </div>
 </section>
 
 <section id="s5">
-  <figure class="sticker  rv"><img src="img/ph/33.jpg" alt="Сурок" loading="lazy"><figcaption>Чужое из Explore не берём</figcaption></figure>
+  <figure class="sticker  rv"><img src="img/ph/33.jpg" alt="Сурок" loading="lazy"><figcaption>Explore — это не шведский стол</figcaption></figure>
   <div class="wrap">
     <div class="narrow">
-      <div class="head rv"><div class="big-n">05</div><div><h2>Можно и нельзя</h2><span class="say"><img src="img/surok_ava.png" alt="">«Короче, запоминаем»</span></div></div>
+      <div class="head rv"><div class="big-n">05</div><div><h2>Можно и нельзя</h2><span class="say"><img src="img/surok_ava.png" alt="">«Короче, запоминай. Повторять будем, но с осуждением»</span></div></div>
     </div>
     <div class="vs">
       <div class="col yes rv"><h3>Стоит</h3><ul>
@@ -410,10 +422,11 @@ footer.in .peek{transform:translateY(8%)}
         <li>Регистрировать треки как свою музыку на YouTube или в стримингах.</li>
       </ul></div>
     </div>
+    <div class="narrow"><div class="aside r rv"><img src="img/surok_ava.png" alt=""><div><span class="who">сурок шепчет</span><p>Брать трек из Explore — как взять чужой бутерброд из офисного холодильника. Вроде вкусно, но потом стыдно. И юрист.</p></div></div></div>
     <figure class="meme r rv"><img src="img/1_drake_skachivanie.jpg" alt="Мем: что скачивать" loading="lazy"><figcaption>золотое правило</figcaption></figure>
 
     <div class="narrow">
-      <div class="head rv" style="margin-top:40px"><div><h2 style="font-size:clamp(28px,4vw,40px)">Чек-лист перед отправкой</h2><span class="say"><img src="img/surok_ava.png" alt="">«Прошлась — и отправляй»</span></div></div>
+      <div class="head rv" style="margin-top:40px"><div><h2 style="font-size:clamp(28px,4vw,40px)">Чек-лист перед отправкой</h2><span class="say"><img src="img/surok_ava.png" alt="">«Прошёлся — и отправляй»</span></div></div>
       <div class="check rv" id="check">
         <label><input type="checkbox"><span>Режим Custom, модель v6</span></label>
         <label><input type="checkbox"><span>Instrumental включён, голоса нет</span></label>
@@ -422,21 +435,21 @@ footer.in .peek{transform:translateY(8%)}
         <label><input type="checkbox"><span>Понятное название файла</span></label>
         <label><input type="checkbox"><span>Скачан WAV или отправлена ссылка</span></label>
       </div>
-      <div class="done" id="done">Всё, можно отправлять!</div>
+      <div class="done" id="done">Всё отмечено. Сурки в шоке, честно. Отправляй!</div>
     </div>
   </div>
 </section>
 
 <section id="gal">
   <div class="wrap">
-    <div class="head rv"><div class="big-n">★</div><div><h2>Сурки одобряют</h2><span class="say"><img src="img/surok_ava.png" alt="">«Узнали себя?»</span></div></div>
+    <div class="head rv"><div class="big-n">★</div><div><h2>Сурки одобряют</h2><span class="say"><img src="img/surok_ava.png" alt="">«Узнал себя? Мы тоже»</span></div></div>
     <div class="gallery">
-      <figure class="rv"><img src="img/ph/57.jpg" alt="Сурок" loading="lazy"><figcaption>Трек утвердили!</figcaption></figure>
-      <figure class="rv"><img src="img/ph/51.jpg" alt="Сурок" loading="lazy"><figcaption>Suno выдал вокал на японском</figcaption></figure>
-      <figure class="rv"><img src="img/ph/58.jpg" alt="Сурок" loading="lazy"><figcaption>После 10-й генерации</figcaption></figure>
-      <figure class="rv"><img src="img/ph/29.jpg" alt="Сурок" loading="lazy"><figcaption>Проверяю, включён ли Instrumental</figcaption></figure>
-      <figure class="rv"><img src="img/ph/35.jpg" alt="Сурок" loading="lazy"><figcaption>Слушаю трек до конца</figcaption></figure>
-      <figure class="rv"><img src="img/ph/34.jpg" alt="Сурок" loading="lazy"><figcaption>Жду, пока сгенерится</figcaption></figure>
+      <figure class="rv"><img src="img/ph/57.jpg" alt="Сурок" loading="lazy"><figcaption>Трек утвердили с первого раза. Это постановка</figcaption></figure>
+      <figure class="rv"><img src="img/ph/51.jpg" alt="Сурок" loading="lazy"><figcaption>Suno спел на японском, и тебе понравилось</figcaption></figure>
+      <figure class="rv"><img src="img/ph/58.jpg" alt="Сурок" loading="lazy"><figcaption>После десятой генерации. Это не лень, это стратегия</figcaption></figure>
+      <figure class="rv"><img src="img/ph/29.jpg" alt="Сурок" loading="lazy"><figcaption>Проверяю Instrumental. В пятый раз</figcaption></figure>
+      <figure class="rv"><img src="img/ph/35.jpg" alt="Сурок" loading="lazy"><figcaption>Дослушиваю трек до конца. Как взрослый</figcaption></figure>
+      <figure class="rv"><img src="img/ph/34.jpg" alt="Сурок" loading="lazy"><figcaption>Минута в Suno — три часа в жизни сурка</figcaption></figure>
     </div>
   </div>
 </section>
@@ -444,7 +457,7 @@ footer.in .peek{transform:translateY(8%)}
 
 <footer id="end">
   <div class="wrap">
-    <div class="rv"><h2>Разобрались</h2><p>Кнопки в Suno иногда переезжают и переименовываются. Если что-то выглядит иначе, ориентируйтесь на смысл шага — сурки в вас верят. Удачных треков!</p></div>
+    <div class="rv"><h2>Разобрались</h2><p>Если у вас всё получилось — вы молодец. Если не получилось — вы тоже молодец, просто сурки так не считают. Кнопки в Suno иногда переезжают: если что-то выглядит иначе, ориентируйтесь на смысл шага.</p></div>
     <img class="peek" src="img/surki_flip.png" alt="Сурки машут на прощание">
   </div>
   <div class="wrap"><p class="credits">Фото сурков: <a href="https://commons.wikimedia.org/wiki/File:Groundhog_Female_Standing.jpg" target="_blank" rel="noopener">LadyCamera</a> (CC BY-SA 4.0); <a href="https://commons.wikimedia.org/wiki/File:Afraid_Marmot_(60796772).jpeg" target="_blank" rel="noopener">Stefano Bodini</a> (CC BY-SA 3.0); <a href="https://commons.wikimedia.org/wiki/File:Hoary_marmots_(Marmota_caligata_cascadensis)_wrestling_Whistler.jpg" target="_blank" rel="noopener">Charles J. Sharp</a> (CC BY-SA 4.0); <a href="https://commons.wikimedia.org/wiki/File:Marmota_marmota_07.jpg" target="_blank" rel="noopener">Kuebi = Armin Kübelbeck</a> (CC BY-SA 3.0); <a href="https://commons.wikimedia.org/wiki/File:Marmots_Eating_Trash.jpg" target="_blank" rel="noopener">Cullen328</a> (CC BY 3.0); <a href="https://commons.wikimedia.org/wiki/File:Hoary_marmots_(Marmota_caligata_cascadensis)_wrestling_Whistler_2.jpg" target="_blank" rel="noopener">Charles J. Sharp</a> (CC BY-SA 4.0); <a href="https://commons.wikimedia.org/wiki/File:Hoary_marmot_(Marmota_caligata_cascadensis)_Whistler_3.jpg" target="_blank" rel="noopener">Charles J. Sharp</a> (CC BY-SA 4.0); <a href="https://commons.wikimedia.org/wiki/File:Marmota_monax_UL_04.jpg" target="_blank" rel="noopener">Cephas</a> (CC BY-SA 3.0); <a href="https://commons.wikimedia.org/wiki/File:Marmot_Peek-a-boo_(3169605160).jpg" target="_blank" rel="noopener">Jeffrey Pang from Berkeley, CA, USA</a> (CC BY 2.0); <a href="https://commons.wikimedia.org/wiki/File:Yellow-bellied_Marmot_on_Tundra_(51699794884).jpg" target="_blank" rel="noopener">Great Sand Dunes National Park and Prese</a> (Public domain); <a href="https://commons.wikimedia.org/wiki/File:Yelllow-bellied_Marmot_(53501805653).jpg" target="_blank" rel="noopener">Great Sand Dunes National Park and Prese</a> (Public domain). Источник — Wikimedia Commons.</p></div>
@@ -483,7 +496,7 @@ addEventListener('scroll',()=>{const dy=scrollY-lastY;lastY=scrollY;place();
 addEventListener('resize',place);place();
 
 // клик по суркам — новая реплика
-const phr=['Ща всё покажем','Instrumental включила?','Только Custom!','Пять попыток и хватит','Не качай всё подряд','Дослушай до конца','Скопируй стиль, не мучайся','Мы в тебя верим'];let pi=0;
+const phr=['Ща всё покажем','Мы сурки. Вся наша жизнь — разбираться и спать','Мы не музыканты. Но и Suno тоже','Нажми ещё раз, я не обиделся','Instrumental включил? Покажи','Сурок не советует. Сурок констатирует','Пять попыток — и хватит. Мы проверяли','Ладно, последний раз. Нет, вру'];let pi=0;
 const mb=document.querySelector('.mascot .bubble');
 document.querySelector('.mascot').addEventListener('click',()=>{pi=(pi+1)%phr.length;mb.textContent=phr[pi];mb.style.animation='none';mb.classList.remove('re');void mb.offsetWidth;mb.style.transform='rotate(-6deg) scale(1)';mb.classList.add('re')});
 </script>
