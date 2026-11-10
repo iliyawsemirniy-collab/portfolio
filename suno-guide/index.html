@@ -1,0 +1,491 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Ща разберёмся · Suno</title>
+<meta name="description" content="Как сделать музыку для видео в Suno: по шагам, без паники. Куда нажимать, готовые стили, чек-лист.">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Ща разберёмся · музыка в Suno по шагам">
+<meta property="og:description" content="Куда нажимать, что писать в Style, готовые стили и чек-лист. С сурками.">
+<meta property="og:image" content="https://iliyawsemirniy-collab.github.io/portfolio/suno-guide/img/og.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+<style>
+@font-face{font-family:Gilroy;src:url(../fonts/Gilroy-Medium.ttf) format('truetype');font-weight:500;font-display:swap}
+@font-face{font-family:Gilroy;src:url(../fonts/Gilroy-Bold.ttf) format('truetype');font-weight:700;font-display:swap}
+@font-face{font-family:Gilroy;src:url(../fonts/Gilroy-Heavy.ttf) format('truetype');font-weight:900;font-display:swap}
+:root{
+  --bg:#0c110d; --bg2:#111812; --panel:#161f17; --panel2:#1d281e; --line:rgba(235,230,210,.10);
+  --ink:#f1ede2; --body:#cfd3c6; --dim:#8f9a8c; --fur:#d9a467; --fur2:#b77b3f; --cream:#f4ecdc;
+  --grass:#a6d65e; --orange:#ff7a2f; --red:#ff5b4d;
+  --disp:'Gilroy',-apple-system,system-ui,sans-serif; --mono:'JetBrains Mono',ui-monospace,Menlo,monospace; --hand:'Caveat',cursive;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--body);font:500 18px/1.6 var(--disp);overflow-x:hidden;-webkit-font-smoothing:antialiased}
+img{display:block;max-width:100%}
+a{color:var(--grass);text-underline-offset:3px}
+b,strong{color:var(--ink);font-weight:700}
+.wrap{width:min(1120px,100% - 32px);margin:0 auto}
+.narrow{max-width:760px}
+
+/* фон: зерно + мягкий свет */
+body::before{content:"";position:fixed;inset:0;z-index:-2;pointer-events:none;
+  background:radial-gradient(70% 55% at 90% -10%,rgba(217,164,103,.16),transparent 70%),radial-gradient(60% 50% at -10% 40%,rgba(166,214,94,.08),transparent 70%)}
+.grain{position:fixed;inset:-50%;z-index:60;pointer-events:none;opacity:.06;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence baseFrequency='.85' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  animation:grain 1s steps(6) infinite}
+@keyframes grain{0%{transform:translate(0,0)}33%{transform:translate(-3%,2%)}66%{transform:translate(2%,-3%)}100%{transform:translate(1%,3%)}}
+.progress{position:fixed;left:0;top:0;height:4px;width:0;z-index:70;background:linear-gradient(90deg,var(--grass),var(--fur))}
+
+/* метки */
+.kicker{font:500 12px var(--mono);letter-spacing:.16em;text-transform:uppercase;color:var(--dim);display:inline-flex;align-items:center;gap:10px}
+.kicker i{width:8px;height:8px;border-radius:50%;background:var(--grass);box-shadow:0 0 14px var(--grass);animation:blink 1.6s infinite}
+@keyframes blink{50%{opacity:.25}}
+.hand{font-family:var(--hand);font-weight:700}
+
+/* HERO */
+.hero{min-height:100svh;display:grid;align-items:center;position:relative;overflow:hidden}
+.hero .wrap{display:grid;grid-template-columns:1.1fr .9fr;gap:40px;align-items:end;min-height:100svh;padding:80px 0 0}
+.hero .wrap>div:first-child{align-self:center}
+.hero h1{font:900 clamp(60px,10.5vw,150px)/.88 var(--disp);color:var(--ink);letter-spacing:-.03em;margin:20px 0 26px}
+.hero h1 .u{position:relative;display:inline-block}
+.hero h1 .u svg{position:absolute;left:-2%;bottom:-.12em;width:104%;height:.32em;overflow:visible}
+.hero h1 .u path{stroke:var(--fur);stroke-width:9;fill:none;stroke-linecap:round;stroke-dasharray:620;stroke-dashoffset:620;animation:draw 1.1s .7s cubic-bezier(.6,0,.2,1) forwards}
+@keyframes draw{to{stroke-dashoffset:0}}
+.hero .sub{font-size:clamp(19px,2.2vw,23px);color:var(--body);max-width:560px}
+.hero .sub b{color:var(--cream)}
+.hero .go{display:inline-flex;align-items:center;gap:12px;margin:34px 0 90px;font:700 17px var(--disp);color:#0c110d;background:var(--grass);padding:15px 24px;border-radius:999px;text-decoration:none;transition:transform .2s}
+.hero .go:hover{transform:translateY(-2px)}
+.hero .go span{display:inline-block;animation:down 1.4s infinite}
+@keyframes down{50%{transform:translateY(4px)}}
+.mascot{position:relative;justify-self:center;width:min(440px,100%);margin:120px 0 -6px}
+.mascot img{position:relative;z-index:1;width:100%;filter:drop-shadow(0 14px 18px rgba(0,0,0,.35));transform-origin:50% 100%;animation:bob 4.5s ease-in-out infinite}
+@keyframes bob{0%,100%{transform:rotate(-1deg) translateY(0)}50%{transform:rotate(1.2deg) translateY(-8px)}}
+.bubble{position:absolute;background:var(--cream);color:#1b1a14;font:700 clamp(26px,3vw,34px)/1 var(--hand);padding:14px 20px 16px;border-radius:22px;box-shadow:0 10px 30px rgba(0,0,0,.35);white-space:nowrap}
+.bubble::after{content:"";position:absolute;width:22px;height:22px;background:var(--cream);transform:rotate(45deg);border-radius:4px}
+.mascot .bubble{z-index:3;left:30%;top:-21%;transform:rotate(-6deg) scale(0);animation:pop .5s 1.3s cubic-bezier(.3,1.6,.5,1) forwards}
+.mascot .bubble::after{right:34px;bottom:-8px}
+@keyframes pop{to{transform:rotate(-6deg) scale(1)}}
+.grass{position:absolute;left:0;right:0;bottom:-2px;height:70px;pointer-events:none}
+
+/* маршрут */
+.route{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin:40px 0 0}
+.route a{display:block;text-decoration:none;background:var(--panel);border:1px solid var(--line);border-radius:18px;padding:16px;color:var(--body);transition:border-color .2s,transform .2s}
+.route a:hover{border-color:var(--fur);transform:translateY(-3px)}
+.route .n{font:900 30px var(--disp);color:var(--fur)}
+.route .t{font:700 16px/1.25 var(--disp);color:var(--ink);margin:6px 0 4px}
+.route .m{font:500 12px var(--mono);color:var(--dim)}
+
+/* разделы */
+section{padding:110px 0 20px;position:relative}
+.head{display:grid;grid-template-columns:auto 1fr;gap:26px;align-items:end;margin-bottom:34px}
+.big-n{font:900 clamp(90px,14vw,170px)/.8 var(--disp);color:transparent;-webkit-text-stroke:2px rgba(217,164,103,.55);letter-spacing:-.04em}
+.head h2{font:900 clamp(34px,5vw,58px)/1 var(--disp);color:var(--ink);letter-spacing:-.02em}
+.head .say{display:inline-flex;align-items:center;gap:10px;font:700 25px/1.1 var(--hand);color:#1b1a14;background:var(--cream);margin-top:14px;padding:5px 16px 7px 5px;border-radius:999px;transform:rotate(-1.5deg);transform-origin:left;box-shadow:0 8px 24px rgba(0,0,0,.35)}
+.head .say img{width:40px;height:40px;border-radius:50%;flex:none}
+.intro{font-size:20px;color:var(--body);max-width:700px;margin:0 0 26px}
+
+/* шаги */
+.steps{list-style:none;position:relative;display:grid;gap:14px;margin:10px 0 0}
+.steps::before{content:"";position:absolute;left:23px;top:20px;bottom:20px;width:2px;background:linear-gradient(var(--fur),rgba(217,164,103,.1))}
+.steps li{position:relative;padding:16px 20px 16px 72px;background:var(--panel);border:1px solid var(--line);border-radius:18px}
+.steps li .d{position:absolute;left:6px;top:13px;width:36px;height:36px;border-radius:50%;display:grid;place-items:center;font:900 16px var(--disp);color:#0c110d;background:var(--fur);box-shadow:0 0 0 6px var(--bg)}
+.steps li.key{background:linear-gradient(120deg,rgba(166,214,94,.16),var(--panel) 60%);border-color:rgba(166,214,94,.45)}
+.steps li.key .d{background:var(--grass)}
+.steps li .what{display:block;font:700 19px/1.35 var(--disp);color:var(--ink);margin-bottom:2px}
+
+/* кнопки интерфейса Suno */
+.ui{display:inline-flex;align-items:center;gap:6px;font:700 .86em/1 var(--disp);color:#fff;background:#24262b;border:1px solid #3a3d44;padding:6px 11px 7px;border-radius:10px;white-space:nowrap;vertical-align:1px}
+.ui.go{background:var(--orange);border-color:var(--orange);color:#fff;border-radius:999px}
+.ui.tab{background:#f3f3f3;color:#111;border-color:#f3f3f3}
+code{font:500 .84em var(--mono);color:var(--cream);background:rgba(217,164,103,.13);padding:3px 7px;border-radius:7px}
+
+/* макет переключателя */
+.toggle-demo{display:flex;align-items:center;gap:14px;margin:12px 0 4px;font:700 16px var(--disp);color:var(--ink)}
+.sw{width:54px;height:30px;border-radius:999px;background:#3a3d44;position:relative;flex:none}
+.sw::after{content:"";position:absolute;top:3px;left:3px;width:24px;height:24px;border-radius:50%;background:#fff;transition:transform .35s cubic-bezier(.5,1.6,.5,1)}
+.in .sw{animation:swbg .01s 1s forwards}
+.in .sw::after{animation:swk .45s 1s cubic-bezier(.5,1.6,.5,1) forwards}
+@keyframes swbg{to{background:var(--grass)}}
+@keyframes swk{to{transform:translateX(24px)}}
+
+/* мемы: полароид со скотчем */
+.meme{margin:46px auto;max-width:520px;background:#f6f1e6;padding:14px 14px 18px;border-radius:6px;box-shadow:0 26px 60px rgba(0,0,0,.5);position:relative;transform:rotate(-2deg)}
+.meme.r{transform:rotate(2deg)}
+.meme::before{content:"";position:absolute;top:-14px;left:50%;width:120px;height:30px;margin-left:-60px;background:rgba(244,236,220,.55);transform:rotate(-3deg);backdrop-filter:blur(2px);border-left:1px dashed rgba(0,0,0,.08);border-right:1px dashed rgba(0,0,0,.08)}
+.meme img{border-radius:3px;width:100%}
+.meme figcaption{font:700 26px/1.1 var(--hand);color:#3b3326;text-align:center;margin-top:12px}
+
+/* код-шаблон */
+pre{font:500 15px/1.7 var(--mono);color:var(--cream);background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:16px 20px;margin:16px 0}
+pre .c{color:var(--dim)}
+
+/* стили */
+.styles{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.style{background:var(--panel);border:1px solid var(--line);border-radius:20px;padding:18px;display:flex;flex-direction:column;gap:12px}
+.style .lab{font:500 12px var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--fur)}
+.style h3{font:900 22px/1.15 var(--disp);color:var(--ink)}
+.style code{display:block;padding:12px 14px;font-size:14px;line-height:1.55}
+.style .copy{margin-top:auto}
+.style .ex{font:500 13px var(--mono);color:var(--dim)}
+.style .ex code{display:inline;padding:2px 6px;font-size:12px}
+.group{margin:8px 0 16px}
+.group .gl{font:500 12px var(--mono);letter-spacing:.14em;text-transform:uppercase;color:var(--grass)}
+.group h3{font:900 clamp(24px,3vw,32px)/1.1 var(--disp);color:var(--ink);margin:6px 0 6px}
+.group p{max-width:720px;margin:0}
+.styles.yoga .style{border-color:rgba(166,214,94,.28);background:linear-gradient(160deg,rgba(166,214,94,.08),var(--panel) 55%)}
+.copy{align-self:flex-start;font:700 14px var(--disp);color:#0c110d;background:var(--fur);border:0;border-radius:999px;padding:10px 16px;cursor:pointer;transition:transform .15s,background .2s}
+.copy:hover{transform:translateY(-2px)} .copy.ok{background:var(--grass)}
+.formula{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin:20px 0 8px}
+.formula span{font:700 15px var(--disp);color:var(--ink);background:var(--panel2);border:1px solid var(--line);padding:8px 12px;border-radius:12px}
+.formula i{font-style:normal;color:var(--fur);font-weight:900}
+
+/* доработка */
+.fix{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.fix>div{background:var(--panel);border:1px solid var(--line);border-radius:20px;padding:20px}
+.fix .q{font:700 26px/1.1 var(--hand);color:var(--grass);margin-bottom:8px}
+.fix p{margin:0}
+
+.note{display:flex;gap:14px;align-items:flex-start;background:rgba(217,164,103,.09);border:1px solid rgba(217,164,103,.3);border-radius:18px;padding:16px 18px;margin:22px 0;color:#eadfca}
+.note .ic{flex:none;font:900 20px var(--disp);width:34px;height:34px;border-radius:50%;display:grid;place-items:center;background:var(--fur);color:#0c110d}
+
+/* можно / нельзя */
+.vs{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.vs .col{border-radius:22px;padding:22px;border:1px solid var(--line);background:var(--panel)}
+.vs h3{font:900 28px var(--disp);margin-bottom:14px}
+.vs .yes h3{color:var(--grass)} .vs .no h3{color:var(--red)}
+.vs ul{list-style:none;display:grid;gap:12px}
+.vs li{padding-left:34px;position:relative}
+.vs li::before{position:absolute;left:0;top:1px;width:22px;height:22px;border-radius:50%;display:grid;place-items:center;font:900 13px var(--disp);color:#0c110d}
+.vs .yes li::before{content:"✓";background:var(--grass)}
+.vs .no li::before{content:"✕";background:var(--red)}
+
+/* чек-лист */
+.check{background:var(--panel);border:1px solid var(--line);border-radius:22px;padding:8px 22px}
+.check label{display:flex;gap:14px;align-items:center;padding:14px 0;border-bottom:1px solid var(--line);cursor:pointer;color:var(--ink);font-weight:700}
+.check label:last-child{border-bottom:0}
+.check input{appearance:none;width:26px;height:26px;border-radius:8px;border:2px solid var(--fur);flex:none;display:grid;place-items:center;transition:background .2s}
+.check input:checked{background:var(--grass);border-color:var(--grass)}
+.check input:checked::after{content:"✓";color:#0c110d;font:900 15px var(--disp)}
+.check input:checked+span{color:var(--dim);text-decoration:line-through}
+.done{font:700 30px var(--hand);color:var(--grass);margin-top:14px;opacity:0;transition:opacity .4s}
+.done.on{opacity:1}
+
+/* финал */
+footer{position:relative;padding:120px 0 0;overflow:hidden}
+footer .wrap{display:grid;grid-template-columns:1fr auto;gap:30px;align-items:end}
+footer h2{font:900 clamp(44px,7vw,90px)/.95 var(--disp);color:var(--ink);letter-spacing:-.03em}
+footer p{font-size:20px;max-width:520px;margin:18px 0 80px}
+footer .peek{width:min(300px,42vw);transform:translateY(40%);transition:transform .9s cubic-bezier(.3,1.4,.5,1)}
+footer.in .peek{transform:translateY(8%)}
+
+/* появление */
+.rv{opacity:0;transform:translateY(28px);transition:opacity .7s ease,transform .7s cubic-bezier(.2,.8,.2,1)}
+.rv.in{opacity:1;transform:none}
+.meme.rv{transform:translateY(40px) rotate(-6deg)} .meme.rv.in{transform:rotate(-2deg)}
+.meme.r.rv{transform:translateY(40px) rotate(6deg)} .meme.r.rv.in{transform:rotate(2deg)}
+
+.side-peek{position:absolute;right:-30px;width:170px;opacity:0;transform:translateX(60px) rotate(8deg);transition:all .8s cubic-bezier(.3,1.4,.5,1);pointer-events:none}
+.side-peek.in{opacity:1;transform:translateX(0) rotate(-4deg)}
+
+@media (max-width:900px){
+  .hero .wrap{grid-template-columns:1fr;align-items:center;padding-top:56px}
+  .mascot{width:min(300px,78vw);margin-top:90px}
+  .hero .go{margin:26px 0 30px}
+  .route{grid-template-columns:repeat(2,1fr)}
+  .styles,.fix,.vs{grid-template-columns:1fr}
+  .side-peek{display:none}
+  footer .wrap{grid-template-columns:1fr}
+  footer .peek{justify-self:end}
+}
+@media (max-width:560px){
+  body{font-size:17px}
+  section{padding-top:80px}
+  .head{grid-template-columns:1fr;gap:4px}
+  .big-n{font-size:84px}
+  .steps li{padding:14px 16px 14px 62px}
+  .steps::before{left:21px}
+  .steps li .d{left:4px}
+  .mascot .bubble{left:22%;top:-24%}
+}
+@media (prefers-reduced-motion:reduce){
+  *{animation:none!important;transition:none!important}
+  .rv,.side-peek{opacity:1;transform:none}
+  .mascot .bubble{transform:rotate(-6deg)}
+  .hero h1 .u path{stroke-dashoffset:0}
+}
+
+/* сурок-бегун справа */
+.runner{position:fixed;right:22px;top:0;width:92px;z-index:40;pointer-events:none;opacity:0;transition:opacity .4s;will-change:transform;filter:drop-shadow(0 10px 12px rgba(0,0,0,.45))}
+.runner.show{opacity:1}
+.runner img{width:100%;transform-origin:50% 90%}
+.runner.go img{animation:run .26s infinite alternate ease-in-out}
+@keyframes run{from{transform:rotate(-8deg) translateY(-5px)}to{transform:rotate(8deg) translateY(3px)}}
+.runner .dust{position:absolute;left:50%;top:-6px;width:40px;height:14px;margin-left:-20px;border-radius:50%;background:radial-gradient(rgba(217,164,103,.35),transparent 70%);opacity:0;transition:opacity .2s}
+.runner.go.down .dust{opacity:1}
+@media (max-width:900px){.runner{width:58px;right:-8px}}
+@media (prefers-reduced-motion:reduce){.runner.go img{animation:none}}
+
+/* наклейки-сурки у разделов */
+.sticker{position:absolute;top:96px;right:max(12px,calc(50% - 610px));width:200px;background:#f6f1e6;padding:9px 9px 12px;border-radius:5px;box-shadow:0 18px 40px rgba(0,0,0,.5);transform:rotate(5deg);z-index:2;transition:transform .3s}
+.sticker:hover{transform:rotate(0) scale(1.05)}
+.sticker img{width:100%;border-radius:2px}
+.sticker figcaption{font:700 21px/1.05 var(--hand);color:#3b3326;text-align:center;margin-top:8px}
+.sticker.l{transform:rotate(-5deg)}
+.sticker.rv{opacity:0;transform:translateY(30px) rotate(14deg)} .sticker.rv.in{opacity:1;transform:rotate(5deg)}
+.sticker.l.rv{transform:translateY(30px) rotate(-14deg)} .sticker.l.rv.in{transform:rotate(-5deg)}
+/* галерея */
+.gallery{display:grid;grid-template-columns:repeat(3,1fr);gap:28px 22px;margin-top:10px}
+.gallery figure{background:#f6f1e6;padding:10px 10px 14px;border-radius:5px;box-shadow:0 20px 44px rgba(0,0,0,.5);transition:transform .3s}
+.gallery figure:nth-child(odd){transform:rotate(-2.5deg)} .gallery figure:nth-child(even){transform:rotate(2deg)} .gallery figure:nth-child(3n){transform:rotate(-1deg)}
+.gallery figure:hover{transform:rotate(0) scale(1.04);z-index:2}
+.gallery img{width:100%;border-radius:2px}
+.gallery figcaption{font:700 24px/1.05 var(--hand);color:#3b3326;text-align:center;margin-top:10px}
+.gallery figure.rv{opacity:0} .gallery figure.rv.in{opacity:1}
+.mascot{cursor:pointer}
+.mascot .hint{position:absolute;right:-4%;bottom:12%;z-index:3;font:700 20px/1 var(--hand);color:var(--grass);transform:rotate(-8deg)}
+.mascot .bubble.re{animation:repop .45s cubic-bezier(.3,1.6,.5,1)}
+@keyframes repop{0%{transform:rotate(-6deg) scale(.6)}100%{transform:rotate(-6deg) scale(1)}}
+.credits{font:500 11px/1.6 var(--mono);color:var(--mute,#5c6773);margin:0 0 40px;max-width:900px}
+.credits a{color:inherit}
+@media (max-width:1240px){.sticker{display:none}}
+@media (max-width:900px){.gallery{grid-template-columns:1fr 1fr;gap:18px 14px}.gallery figcaption{font-size:20px}}
+</style>
+</head>
+<body>
+<div class="grain"></div>
+<div class="progress" id="pr"></div>
+<div class="runner" id="run" aria-hidden="true"><span class="dust"></span><img src="img/surok_l.png" alt=""></div>
+
+<header class="hero">
+  <div class="wrap">
+    <div>
+      <span class="kicker"><i></i>Полевой гайд · Suno · 2026</span>
+      <h1>Ща<br><span class="u">разберёмся<svg viewBox="0 0 600 40" preserveAspectRatio="none"><path d="M4 26 C 120 6, 260 34, 380 16 S 560 10, 596 22"/></svg></span></h1>
+      <p class="sub">Привет! Здесь по шагам и простыми словами расписано, как сделать в Suno <b>музыку для видео</b>: куда нажимать, что писать и чего лучше не делать. Займёт <b>5–10 минут</b> на трек.</p>
+      <a class="go" href="#route">Поехали <span>↓</span></a>
+    </div>
+    <div class="mascot">
+      <div class="bubble">Ща всё покажем</div>
+      <img src="img/surki.png" alt="Два сурка смотрят в камеру">
+      <span class="hint">тыкни ↓</span>
+    </div>
+  </div>
+  <svg class="grass" viewBox="0 0 1440 70" preserveAspectRatio="none"><path fill="#0c110d" d="M0 70 V44 L8 28 L15 40 L20 10 L26 45 L36 33 L45 43 L50 30 L55 46 L60 20 L66 48 L74 34 L82 41 L88 16 L95 40 L104 14 L114 40 L120 33 L127 42 L134 15 L141 48 L146 12 L152 48 L162 22 L172 43 L180 31 L187 41 L196 34 L206 43 L214 13 L223 46 L234 23 L245 47 L252 20 L260 42 L270 20 L281 44 L290 16 L299 47 L306 8 L313 41 L322 15 L331 45 L337 17 L343 40 L353 32 L363 45 L370 9 L378 47 L388 13 L397 41 L404 21 L411 41 L416 8 L421 47 L428 10 L435 45 L440 17 L445 42 L454 30 L464 40 L470 19 L477 43 L485 21 L493 41 L499 18 L505 48 L512 28 L519 48 L526 10 L533 45 L543 17 L553 42 L558 23 L564 43 L574 19 L584 47 L594 25 L603 44 L608 28 L613 48 L620 16 L628 45 L634 12 L640 40 L648 13 L657 46 L665 20 L673 41 L682 12 L690 40 L696 27 L703 47 L709 28 L715 40 L720 35 L726 42 L735 28 L744 40 L750 29 L755 46 L761 10 L767 45 L776 22 L786 41 L792 18 L797 47 L806 18 L814 42 L820 20 L825 47 L836 29 L846 40 L852 15 L859 42 L870 9 L880 48 L887 7 L894 44 L903 17 L912 45 L923 27 L934 48 L945 15 L956 43 L966 23 L975 46 L986 22 L996 48 L1004 15 L1013 40 L1024 25 L1035 44 L1042 13 L1048 45 L1056 20 L1065 41 L1072 26 L1078 47 L1084 19 L1091 47 L1100 7 L1110 47 L1120 25 L1130 41 L1140 29 L1150 43 L1158 27 L1167 45 L1172 21 L1178 46 L1188 26 L1199 42 L1205 28 L1211 47 L1222 8 L1233 47 L1243 17 L1253 48 L1262 22 L1271 40 L1282 7 L1293 48 L1304 28 L1314 43 L1320 30 L1327 43 L1334 13 L1341 45 L1348 15 L1355 42 L1360 22 L1365 48 L1373 12 L1381 48 L1387 18 L1393 40 L1402 30 L1410 40 L1421 24 L1432 42 L1440 8 L1449 48 V70Z"/></svg>
+</header>
+
+<main>
+<div class="wrap">
+  <nav class="route" id="route">
+    <a class="rv" href="#s1"><div class="n">01</div><div class="t">Сделать трек</div><div class="m">≈ 5 мин</div></a>
+    <a class="rv" href="#s2"><div class="n">02</div><div class="t">Готовые стили</div><div class="m">копируй-вставляй</div></a>
+    <a class="rv" href="#s3"><div class="n">03</div><div class="t">Доработать</div><div class="m">если почти то</div></a>
+    <a class="rv" href="#s4"><div class="n">04</div><div class="t">Скачать</div><div class="m">WAV, по делу</div></a>
+    <a class="rv" href="#s5"><div class="n">05</div><div class="t">Можно и нельзя</div><div class="m">+ чек-лист</div></a>
+  </nav>
+</div>
+
+<section id="s1">
+  <figure class="sticker  rv"><img src="img/ph/63.jpg" alt="Сурок" loading="lazy"><figcaption>Режим Custom. Стоим ровно</figcaption></figure>
+  <div class="wrap narrow">
+    <div class="head rv"><div class="big-n">01</div><div><h2>Делаем трек</h2><span class="say"><img src="img/surok_ava.png" alt="">«Только Custom, не спорим»</span></div></div>
+    <p class="intro rv">Suno пишет музыку по описанию: вы говорите словами, какой нужен трек, а через минуту получаете два варианта. Для роликов нужна музыка <b>без голоса</b>, поэтому всё ниже про инструментальные треки.</p>
+
+    <figure class="meme rv"><img src="img/2_knopki_simple_custom_all.jpg" alt="Мем: выбор между Simple и Custom" loading="lazy"><figcaption>спойлер: жмём Custom</figcaption></figure>
+
+    <ol class="steps">
+      <li class="rv"><span class="d">1</span><span class="what">Войдите на сайт</span>Откройте <a href="https://suno.com" target="_blank" rel="noopener">suno.com</a> и нажмите <span class="ui">Sign in</span> в правом верхнем углу. Проще всего через Google.</li>
+      <li class="rv"><span class="d">2</span><span class="what">Откройте создание трека</span>В меню слева нажмите <span class="ui">Create</span>.</li>
+      <li class="rv"><span class="d">3</span><span class="what">Включите расширенный режим</span>Вверху окна переключитесь с <span class="ui">Simple</span> на <span class="ui tab">Custom</span>. Здесь можно точно задать, какая нужна музыка.</li>
+      <li class="rv"><span class="d">4</span><span class="what">Выберите модель</span>Рядом поставьте <span class="ui">v6</span>: это самая новая версия.</li>
+      <li class="rv key"><span class="d">5</span><span class="what">Самый важный шаг: уберите голос</span>Включите переключатель Instrumental, чтобы в треке не было пения.
+        <div class="toggle-demo"><span class="sw"></span>Instrumental</div></li>
+      <li class="rv"><span class="d">6</span><span class="what">Опишите музыку</span>В поле <span class="ui">Style</span> вставьте описание на английском. Готовые варианты в разделе 02, их можно просто скопировать.</li>
+      <li class="rv"><span class="d">7</span><span class="what">Скажите, чего не надо</span>В поле <span class="ui">Exclude Styles</span> напишите <code>vocals, choir</code>, то есть «без голоса и без хора».</li>
+      <li class="rv"><span class="d">8</span><span class="what">Подпишите трек</span>В поле <span class="ui">Title</span> напишите понятное название, например «Тизер — вариант 1».</li>
+      <li class="rv"><span class="d">9</span><span class="what">Запустите</span>Нажмите <span class="ui go">Create</span> внизу. Через минуту справа появятся два варианта.</li>
+      <li class="rv"><span class="d">10</span><span class="what">Послушайте и повторите</span>Нажмите на обложку, чтобы послушать. Не то? Ещё раз <span class="ui go">Create</span>. Обычно хороший вариант получается с 3–5 попытки.</li>
+      <li class="rv"><span class="d">11</span><span class="what">Отметьте лучший</span>Поставьте лайк понравившемуся треку, чтобы не потерять его среди остальных.</li>
+    </ol>
+
+    <figure class="meme r rv"><img src="img/3_gru_instrumental_all.jpg" alt="Мем: забыла включить Instrumental" loading="lazy"><figcaption>поэтому шаг 5 — самый важный</figcaption></figure>
+
+    <p class="rv"><b>Бонус для поля Lyrics.</b> Для музыки без голоса его можно не заполнять. Но если вписать план трека, музыка будет сначала нарастать, а потом «взрываться»:</p>
+<pre class="rv">[Intro]   <span class="c">спокойное начало</span>
+[Build]   <span class="c">нарастание</span>
+[Drop]    <span class="c">самая яркая часть</span>
+[Outro]   <span class="c">концовка</span></pre>
+  </div>
+</section>
+
+<section id="s2">
+  <figure class="sticker l rv"><img src="img/ph/36.jpg" alt="Сурок" loading="lazy"><figcaption>Подбираю слова для Style</figcaption></figure>
+  <div class="wrap">
+    <div class="narrow">
+      <div class="head rv"><div class="big-n">02</div><div><h2>Готовые стили</h2><span class="say"><img src="img/surok_ava.png" alt="">«Скопируй и не мучайся»</span></div></div>
+      <p class="intro rv">Нажмите «Скопировать» и вставьте строку в поле Style целиком. Число с bpm — это темп: чем больше, тем быстрее музыка.</p>
+    </div>
+    <div class="group rv"><span class="gl">видео</span><h3>Тизеры, рилсы, истории</h3></div>
+    <div class="styles">
+      <div class="style rv"><span class="lab">тизер · трейлер</span><h3>Напряжение и мощные удары</h3><code>modern trailer, epic hybrid, tense build, pounding drums, braams, risers, 120 bpm, cinematic, big hits</code><button class="copy">Скопировать</button></div>
+      <div class="style rv"><span class="lab">рилс</span><h3>Динамично и бодро</h3><code>electro trap, energetic, heavy 808 bass, punchy drums, sidechain, 140 bpm, modern</code><button class="copy">Скопировать</button></div>
+      <div class="style rv"><span class="lab">эксперт говорит</span><h3>Спокойная подложка под речь</h3><code>minimal corporate electronic, calm, confident, soft plucks, light kick, 100 bpm, background, no lead melody</code><button class="copy">Скопировать</button></div>
+      <div class="style rv"><span class="lab">lifestyle</span><h3>Лёгко и светло</h3><code>chill pop, warm, bright, soft guitar, finger snaps, 105 bpm, airy, modern</code><button class="copy">Скопировать</button></div>
+      <div class="style rv"><span class="lab">история</span><h3>Тепло и с эмоцией</h3><code>emotional piano, cinematic strings, slow build, hopeful, 80 bpm, warm</code><button class="copy">Скопировать</button></div>
+      <div class="style rv"><span class="lab">своё описание</span><h3>Собрать своё</h3><p style="margin:0">Пишите слова через запятую в таком порядке, на английском:</p>
+        <div class="formula"><span>жанр</span><i>+</i><span>настроение</span><i>+</i><span>2–3 инструмента</span><i>+</i><span>темп</span></div>
+        <p style="margin:0;color:var(--dim)">Suno сильнее слушает то, что написано в начале. Имена исполнителей писать нельзя: описывайте звучание словами.</p></div>
+    </div>
+    <div class="group rv" style="margin-top:46px"><span class="gl">йога · фитнес</span><h3>Для йоги и спокойных тренировок</h3><p>Ровный темп без резких ударов и «взрывов», чтобы музыка не сбивала дыхание и не спорила с голосом тренера. В поле <span class="ui">Exclude Styles</span> вставьте то, что указано под каждым описанием.</p></div>
+    <div class="styles yoga">
+      <div class="style rv"><span class="lab">йога · основной поток</span><h3>Плавная практика</h3><code>calm yoga flow, soft ambient, warm pads, gentle acoustic guitar, light hand percussion, 70 bpm, steady, peaceful, background</code><div class="ex">Exclude: <code>vocals, heavy drums, drops</code></div><button class="copy">Скопировать</button></div>
+      <div class="style rv"><span class="lab">утро · растяжка</span><h3>Мягкое бодрое утро</h3><code>morning stretch, uplifting, light acoustic, soft piano, airy pads, gentle shaker, 85 bpm, fresh, positive, background</code><div class="ex">Exclude: <code>vocals, electric guitar, drops</code></div><button class="copy">Скопировать</button></div>
+      <div class="style rv"><span class="lab">дыхание · медитация</span><h3>Тишина и дыхание</h3><code>meditation ambient, slow, deep calm, singing bowls, soft drones, nature sounds, 60 bpm, spacious, minimal</code><div class="ex">Exclude: <code>vocals, drums, percussion</code></div><button class="copy">Скопировать</button></div>
+      <div class="style rv"><span class="lab">восток · спокойно</span><h3>Мягкий восточный колорит</h3><code>oriental ambient, handpan, bansuri flute, soft tabla, warm pads, 75 bpm, serene, flowing, background</code><div class="ex">Exclude: <code>vocals, chanting, heavy bass</code></div><button class="copy">Скопировать</button></div>
+      <div class="style rv"><span class="lab">лёгкая тренировка</span><h3>Упражнения в ровном ритме</h3><code>light workout, gentle groove, soft electronic, warm bass, steady kick, 95 bpm, motivating, positive, even tempo, background</code><div class="ex">Exclude: <code>vocals, aggressive, drops, dubstep</code></div><button class="copy">Скопировать</button></div>
+      <div class="style rv"><span class="lab">финал · расслабление</span><h3>Отдых в конце занятия</h3><code>relaxation, soft piano, gentle strings, slow, warm, 55 bpm, peaceful ending, minimal, emotional</code><div class="ex">Exclude: <code>vocals, drums</code></div><button class="copy">Скопировать</button></div>
+    </div>
+    <div class="note rv"><span class="ic">!</span><div><b>Для занятий делайте трек длинным.</b> Нажмите <span class="ui">Extend</span> 2–3 раза, чтобы музыки хватило на весь блок упражнений. Как это сделать, смотрите в разделе 03.</div></div>
+    <figure class="meme rv"><img src="img/5_brain_style.jpg" alt="Мем: как писать описание в поле Style" loading="lazy"><figcaption>чем точнее, тем умнее</figcaption></figure>
+  </div>
+</section>
+
+<section id="s3">
+  <figure class="sticker  rv"><img src="img/ph/56.jpg" alt="Сурок" loading="lazy"><figcaption>Спорим, какой вариант лучше</figcaption></figure>
+  <div class="wrap">
+    <div class="narrow">
+      <div class="head rv"><div class="big-n">03</div><div><h2>Если почти нравится</h2><span class="say"><img src="img/surok_ava.png" alt="">«Не выбрасываем, докручиваем»</span></div></div>
+      <p class="intro rv">Все эти кнопки в меню трека: нажмите на три точки <span class="ui">⋯</span> рядом с ним. Пункты часто лежат в подменю <span class="ui">Remix/Edit</span> или <span class="ui">Create</span>.</p>
+    </div>
+    <div class="fix">
+      <div class="rv"><div class="q">Трек короткий?</div><p>Выберите <span class="ui">Extend</span>, укажите секунду, с которой продолжить, и нажмите <span class="ui go">Create</span>. Suno допишет продолжение в том же стиле.</p></div>
+      <div class="rv"><div class="q">Не нравится кусочек?</div><p>Выберите <span class="ui">Replace Section</span> и выделите неудачный кусок на волне. Пересоздастся только он, остальное останется как было.</p></div>
+      <div class="rv"><div class="q">Нужен другой стиль?</div><p>Выберите <span class="ui">Cover</span>, впишите новый стиль и нажмите <span class="ui go">Create</span>. Мелодия останется похожей.</p></div>
+      <div class="rv"><div class="q">Мелодия мешает голосу?</div><p>Выберите <span class="ui">Get Stems</span>: трек разложится на дорожки (барабаны, бас, мелодия), и в монтаже мелодию можно сделать тише.</p></div>
+    </div>
+    <div class="narrow"><div class="note rv"><span class="ic">i</span><div>Каждое такое действие создаёт <b>новый</b> трек в списке, исходный никуда не пропадает.</div></div></div>
+    <figure class="meme r rv"><img src="img/4_boyfriend_generacii.jpg" alt="Мем: ещё одна генерация" loading="lazy"><figcaption>3–5 попыток достаточно, честно</figcaption></figure>
+  </div>
+</section>
+
+<section id="s4">
+  <figure class="sticker l rv"><img src="img/ph/32.jpg" alt="Сурок" loading="lazy"><figcaption>Скачал один и доволен</figcaption></figure>
+  <div class="wrap narrow">
+    <div class="head rv"><div class="big-n">04</div><div><h2>Скачать и передать</h2><span class="say"><img src="img/surok_ava.png" alt="">«Качаем только утверждённое»</span></div></div>
+    <ol class="steps">
+      <li class="rv"><span class="d">1</span><span class="what">Откройте меню трека</span>Нажмите на три точки <span class="ui">⋯</span> рядом с выбранным треком.</li>
+      <li class="rv"><span class="d">2</span><span class="what">Скачайте</span>Выберите <span class="ui">Download</span>, затем <span class="ui">WAV Audio</span>: у него лучшее качество. Если WAV нет, подойдёт MP3.</li>
+      <li class="rv"><span class="d">3</span><span class="what">Переименуйте</span>Файл окажется в «Загрузках». Дайте ему понятное имя, например «Тизер — вариант 2.wav».</li>
+      <li class="rv"><span class="d">4</span><span class="what">Отправьте</span>Пришлите файл монтажёру или заказчику, либо положите в общую папку проекта.</li>
+    </ol>
+    <div class="note rv"><span class="ic">!</span><div><b>Сначала согласовать?</b> Скачивать не нужно: в меню <span class="ui">⋯</span> выберите <span class="ui">Share</span> → <span class="ui">Copy Link</span> и пришлите ссылку. По ней трек слушается прямо в браузере.</div></div>
+    <figure class="meme rv"><img src="img/6_fine_limit.jpg" alt="Мем: лимит скачиваний закончился" loading="lazy"><figcaption>скачиваний в месяц ограниченное число</figcaption></figure>
+  </div>
+</section>
+
+<section id="s5">
+  <figure class="sticker  rv"><img src="img/ph/33.jpg" alt="Сурок" loading="lazy"><figcaption>Чужое из Explore не берём</figcaption></figure>
+  <div class="wrap">
+    <div class="narrow">
+      <div class="head rv"><div class="big-n">05</div><div><h2>Можно и нельзя</h2><span class="say"><img src="img/surok_ava.png" alt="">«Короче, запоминаем»</span></div></div>
+    </div>
+    <div class="vs">
+      <div class="col yes rv"><h3>Стоит</h3><ul>
+        <li>Всегда работать в Custom и включать Instrumental, если не просили песню.</li>
+        <li>Делать 3–5 попыток и выбирать лучшую.</li>
+        <li>Слушать трек целиком: в середине бывает лишний голос или странный звук.</li>
+        <li>Называть треки понятно: проект и номер варианта.</li>
+        <li>Присылать на выбор 2–3 варианта ссылками.</li>
+        <li>Делать трек чуть длиннее ролика: лишнее легко обрезать.</li>
+      </ul></div>
+      <div class="col no rv"><h3>Не стоит</h3><ul>
+        <li>Писать в Style имена исполнителей и названия песен: сервис не примет.</li>
+        <li>Писать описание по-русски: на английском результат точнее.</li>
+        <li>Перегружать описание: хватит 6–10 слов.</li>
+        <li>Скачивать все варианты подряд: лимит скачиваний.</li>
+        <li>Брать чужие треки из раздела Explore: права у их авторов.</li>
+        <li>Регистрировать треки как свою музыку на YouTube или в стримингах.</li>
+      </ul></div>
+    </div>
+    <figure class="meme r rv"><img src="img/1_drake_skachivanie.jpg" alt="Мем: что скачивать" loading="lazy"><figcaption>золотое правило</figcaption></figure>
+
+    <div class="narrow">
+      <div class="head rv" style="margin-top:40px"><div><h2 style="font-size:clamp(28px,4vw,40px)">Чек-лист перед отправкой</h2><span class="say"><img src="img/surok_ava.png" alt="">«Прошлась — и отправляй»</span></div></div>
+      <div class="check rv" id="check">
+        <label><input type="checkbox"><span>Режим Custom, модель v6</span></label>
+        <label><input type="checkbox"><span>Instrumental включён, голоса нет</span></label>
+        <label><input type="checkbox"><span>Трек дослушан до конца</span></label>
+        <label><input type="checkbox"><span>Трек чуть длиннее ролика</span></label>
+        <label><input type="checkbox"><span>Понятное название файла</span></label>
+        <label><input type="checkbox"><span>Скачан WAV или отправлена ссылка</span></label>
+      </div>
+      <div class="done" id="done">Всё, можно отправлять!</div>
+    </div>
+  </div>
+</section>
+
+<section id="gal">
+  <div class="wrap">
+    <div class="head rv"><div class="big-n">★</div><div><h2>Сурки одобряют</h2><span class="say"><img src="img/surok_ava.png" alt="">«Узнали себя?»</span></div></div>
+    <div class="gallery">
+      <figure class="rv"><img src="img/ph/57.jpg" alt="Сурок" loading="lazy"><figcaption>Трек утвердили!</figcaption></figure>
+      <figure class="rv"><img src="img/ph/51.jpg" alt="Сурок" loading="lazy"><figcaption>Suno выдал вокал на японском</figcaption></figure>
+      <figure class="rv"><img src="img/ph/58.jpg" alt="Сурок" loading="lazy"><figcaption>После 10-й генерации</figcaption></figure>
+      <figure class="rv"><img src="img/ph/29.jpg" alt="Сурок" loading="lazy"><figcaption>Проверяю, включён ли Instrumental</figcaption></figure>
+      <figure class="rv"><img src="img/ph/35.jpg" alt="Сурок" loading="lazy"><figcaption>Слушаю трек до конца</figcaption></figure>
+      <figure class="rv"><img src="img/ph/34.jpg" alt="Сурок" loading="lazy"><figcaption>Жду, пока сгенерится</figcaption></figure>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer id="end">
+  <div class="wrap">
+    <div class="rv"><h2>Разобрались</h2><p>Кнопки в Suno иногда переезжают и переименовываются. Если что-то выглядит иначе, ориентируйтесь на смысл шага — сурки в вас верят. Удачных треков!</p></div>
+    <img class="peek" src="img/surki_flip.png" alt="Сурки машут на прощание">
+  </div>
+  <div class="wrap"><p class="credits">Фото сурков: <a href="https://commons.wikimedia.org/wiki/File:Groundhog_Female_Standing.jpg" target="_blank" rel="noopener">LadyCamera</a> (CC BY-SA 4.0); <a href="https://commons.wikimedia.org/wiki/File:Afraid_Marmot_(60796772).jpeg" target="_blank" rel="noopener">Stefano Bodini</a> (CC BY-SA 3.0); <a href="https://commons.wikimedia.org/wiki/File:Hoary_marmots_(Marmota_caligata_cascadensis)_wrestling_Whistler.jpg" target="_blank" rel="noopener">Charles J. Sharp</a> (CC BY-SA 4.0); <a href="https://commons.wikimedia.org/wiki/File:Marmota_marmota_07.jpg" target="_blank" rel="noopener">Kuebi = Armin Kübelbeck</a> (CC BY-SA 3.0); <a href="https://commons.wikimedia.org/wiki/File:Marmots_Eating_Trash.jpg" target="_blank" rel="noopener">Cullen328</a> (CC BY 3.0); <a href="https://commons.wikimedia.org/wiki/File:Hoary_marmots_(Marmota_caligata_cascadensis)_wrestling_Whistler_2.jpg" target="_blank" rel="noopener">Charles J. Sharp</a> (CC BY-SA 4.0); <a href="https://commons.wikimedia.org/wiki/File:Hoary_marmot_(Marmota_caligata_cascadensis)_Whistler_3.jpg" target="_blank" rel="noopener">Charles J. Sharp</a> (CC BY-SA 4.0); <a href="https://commons.wikimedia.org/wiki/File:Marmota_monax_UL_04.jpg" target="_blank" rel="noopener">Cephas</a> (CC BY-SA 3.0); <a href="https://commons.wikimedia.org/wiki/File:Marmot_Peek-a-boo_(3169605160).jpg" target="_blank" rel="noopener">Jeffrey Pang from Berkeley, CA, USA</a> (CC BY 2.0); <a href="https://commons.wikimedia.org/wiki/File:Yellow-bellied_Marmot_on_Tundra_(51699794884).jpg" target="_blank" rel="noopener">Great Sand Dunes National Park and Prese</a> (Public domain); <a href="https://commons.wikimedia.org/wiki/File:Yelllow-bellied_Marmot_(53501805653).jpg" target="_blank" rel="noopener">Great Sand Dunes National Park and Prese</a> (Public domain). Источник — Wikimedia Commons.</p></div>
+</footer>
+
+<script>
+// прогресс прокрутки
+const pr=document.getElementById('pr');
+addEventListener('scroll',()=>{const h=document.documentElement;pr.style.width=(h.scrollTop/(h.scrollHeight-h.clientHeight)*100)+'%'},{passive:true});
+// появление по прокрутке, с лёгкой очерёдностью
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{threshold:.15,rootMargin:'0px 0px -40px 0px'});
+document.querySelectorAll('.rv,footer').forEach((el,i)=>{
+  const sib=[...el.parentElement.children].filter(c=>c.classList.contains('rv'));
+  const k=sib.indexOf(el); if(k>0) el.style.transitionDelay=Math.min(k*60,360)+'ms';
+  io.observe(el);
+});
+// копирование стилей
+document.querySelectorAll('.copy').forEach(b=>b.addEventListener('click',async()=>{
+  const c=b.parentElement.querySelector('code');
+  try{await navigator.clipboard.writeText(c.innerText)}catch(e){const r=document.createRange();r.selectNode(c);getSelection().removeAllRanges();getSelection().addRange(r);document.execCommand('copy')}
+  b.textContent='Скопировано';b.classList.add('ok');setTimeout(()=>{b.textContent='Скопировать';b.classList.remove('ok')},1600);
+}));
+// чек-лист
+const boxes=[...document.querySelectorAll('#check input')],done=document.getElementById('done');
+let saved=[];try{saved=JSON.parse(localStorage.getItem('suno-check')||'[]')}catch(e){}
+boxes.forEach((b,i)=>{b.checked=!!saved[i];b.addEventListener('change',upd)});
+function upd(){const s=boxes.map(b=>b.checked);try{localStorage.setItem('suno-check',JSON.stringify(s))}catch(e){}done.classList.toggle('on',s.every(Boolean))}
+upd();
+
+// сурок бежит вниз вместе с прокруткой
+const run=document.getElementById('run'),ri=run.querySelector('img');let lastY=scrollY,stopT;
+function place(){const h=document.documentElement,max=h.scrollHeight-h.clientHeight,p=max>0?scrollY/max:0,rh=run.offsetHeight||150,top=90,bottom=innerHeight-rh-24;
+  run.style.transform='translateY('+(top+p*(bottom-top))+'px)';run.classList.toggle('show',scrollY>innerHeight*.5)}
+addEventListener('scroll',()=>{const dy=scrollY-lastY;lastY=scrollY;place();
+  if(Math.abs(dy)>0){run.classList.add('go');run.classList.toggle('down',dy>0);ri.style.scale=dy<0?'-1 1':'';clearTimeout(stopT);stopT=setTimeout(()=>{run.classList.remove('go');ri.style.scale=''},160)}},{passive:true});
+addEventListener('resize',place);place();
+
+// клик по суркам — новая реплика
+const phr=['Ща всё покажем','Instrumental включила?','Только Custom!','Пять попыток и хватит','Не качай всё подряд','Дослушай до конца','Скопируй стиль, не мучайся','Мы в тебя верим'];let pi=0;
+const mb=document.querySelector('.mascot .bubble');
+document.querySelector('.mascot').addEventListener('click',()=>{pi=(pi+1)%phr.length;mb.textContent=phr[pi];mb.style.animation='none';mb.classList.remove('re');void mb.offsetWidth;mb.style.transform='rotate(-6deg) scale(1)';mb.classList.add('re')});
+</script>
+</body>
+</html>
