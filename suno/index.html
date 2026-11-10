@@ -224,6 +224,31 @@ footer.in .peek{transform:translateY(8%)}
 .runner.go.down .dust{opacity:1}
 @media (max-width:900px){.runner{width:58px;right:-8px}}
 @media (prefers-reduced-motion:reduce){.runner.go img{animation:none}}
+
+/* наклейки-сурки у разделов */
+.sticker{position:absolute;top:96px;right:max(12px,calc(50% - 610px));width:200px;background:#f6f1e6;padding:9px 9px 12px;border-radius:5px;box-shadow:0 18px 40px rgba(0,0,0,.5);transform:rotate(5deg);z-index:2;transition:transform .3s}
+.sticker:hover{transform:rotate(0) scale(1.05)}
+.sticker img{width:100%;border-radius:2px}
+.sticker figcaption{font:700 21px/1.05 var(--hand);color:#3b3326;text-align:center;margin-top:8px}
+.sticker.l{transform:rotate(-5deg)}
+.sticker.rv{opacity:0;transform:translateY(30px) rotate(14deg)} .sticker.rv.in{opacity:1;transform:rotate(5deg)}
+.sticker.l.rv{transform:translateY(30px) rotate(-14deg)} .sticker.l.rv.in{transform:rotate(-5deg)}
+/* галерея */
+.gallery{display:grid;grid-template-columns:repeat(3,1fr);gap:28px 22px;margin-top:10px}
+.gallery figure{background:#f6f1e6;padding:10px 10px 14px;border-radius:5px;box-shadow:0 20px 44px rgba(0,0,0,.5);transition:transform .3s}
+.gallery figure:nth-child(odd){transform:rotate(-2.5deg)} .gallery figure:nth-child(even){transform:rotate(2deg)} .gallery figure:nth-child(3n){transform:rotate(-1deg)}
+.gallery figure:hover{transform:rotate(0) scale(1.04);z-index:2}
+.gallery img{width:100%;border-radius:2px}
+.gallery figcaption{font:700 24px/1.05 var(--hand);color:#3b3326;text-align:center;margin-top:10px}
+.gallery figure.rv{opacity:0} .gallery figure.rv.in{opacity:1}
+.mascot{cursor:pointer}
+.mascot .hint{position:absolute;right:-4%;bottom:12%;z-index:3;font:700 20px/1 var(--hand);color:var(--grass);transform:rotate(-8deg)}
+.mascot .bubble.re{animation:repop .45s cubic-bezier(.3,1.6,.5,1)}
+@keyframes repop{0%{transform:rotate(-6deg) scale(.6)}100%{transform:rotate(-6deg) scale(1)}}
+.credits{font:500 11px/1.6 var(--mono);color:var(--mute,#5c6773);margin:0 0 40px;max-width:900px}
+.credits a{color:inherit}
+@media (max-width:1240px){.sticker{display:none}}
+@media (max-width:900px){.gallery{grid-template-columns:1fr 1fr;gap:18px 14px}.gallery figcaption{font-size:20px}}
 </style>
 </head>
 <body>
@@ -242,6 +267,7 @@ footer.in .peek{transform:translateY(8%)}
     <div class="mascot">
       <div class="bubble">Ща всё покажем</div>
       <img src="img/surki.png" alt="Два сурка смотрят в камеру">
+      <span class="hint">тыкни ↓</span>
     </div>
   </div>
   <svg class="grass" viewBox="0 0 1440 70" preserveAspectRatio="none"><path fill="#0c110d" d="M0 70 V44 L8 28 L15 40 L20 10 L26 45 L36 33 L45 43 L50 30 L55 46 L60 20 L66 48 L74 34 L82 41 L88 16 L95 40 L104 14 L114 40 L120 33 L127 42 L134 15 L141 48 L146 12 L152 48 L162 22 L172 43 L180 31 L187 41 L196 34 L206 43 L214 13 L223 46 L234 23 L245 47 L252 20 L260 42 L270 20 L281 44 L290 16 L299 47 L306 8 L313 41 L322 15 L331 45 L337 17 L343 40 L353 32 L363 45 L370 9 L378 47 L388 13 L397 41 L404 21 L411 41 L416 8 L421 47 L428 10 L435 45 L440 17 L445 42 L454 30 L464 40 L470 19 L477 43 L485 21 L493 41 L499 18 L505 48 L512 28 L519 48 L526 10 L533 45 L543 17 L553 42 L558 23 L564 43 L574 19 L584 47 L594 25 L603 44 L608 28 L613 48 L620 16 L628 45 L634 12 L640 40 L648 13 L657 46 L665 20 L673 41 L682 12 L690 40 L696 27 L703 47 L709 28 L715 40 L720 35 L726 42 L735 28 L744 40 L750 29 L755 46 L761 10 L767 45 L776 22 L786 41 L792 18 L797 47 L806 18 L814 42 L820 20 L825 47 L836 29 L846 40 L852 15 L859 42 L870 9 L880 48 L887 7 L894 44 L903 17 L912 45 L923 27 L934 48 L945 15 L956 43 L966 23 L975 46 L986 22 L996 48 L1004 15 L1013 40 L1024 25 L1035 44 L1042 13 L1048 45 L1056 20 L1065 41 L1072 26 L1078 47 L1084 19 L1091 47 L1100 7 L1110 47 L1120 25 L1130 41 L1140 29 L1150 43 L1158 27 L1167 45 L1172 21 L1178 46 L1188 26 L1199 42 L1205 28 L1211 47 L1222 8 L1233 47 L1243 17 L1253 48 L1262 22 L1271 40 L1282 7 L1293 48 L1304 28 L1314 43 L1320 30 L1327 43 L1334 13 L1341 45 L1348 15 L1355 42 L1360 22 L1365 48 L1373 12 L1381 48 L1387 18 L1393 40 L1402 30 L1410 40 L1421 24 L1432 42 L1440 8 L1449 48 V70Z"/></svg>
@@ -259,6 +285,7 @@ footer.in .peek{transform:translateY(8%)}
 </div>
 
 <section id="s1">
+  <figure class="sticker  rv"><img src="img/ph/63.jpg" alt="Сурок" loading="lazy"><figcaption>Режим Custom. Стоим ровно</figcaption></figure>
   <div class="wrap narrow">
     <div class="head rv"><div class="big-n">01</div><div><h2>Делаем трек</h2><span class="say"><img src="img/surok_ava.png" alt="">«Только Custom, не спорим»</span></div></div>
     <p class="intro rv">Suno пишет музыку по описанию: вы говорите словами, какой нужен трек, а через минуту получаете два варианта. Для роликов нужна музыка <b>без голоса</b>, поэтому всё ниже про инструментальные треки.</p>
@@ -291,6 +318,7 @@ footer.in .peek{transform:translateY(8%)}
 </section>
 
 <section id="s2">
+  <figure class="sticker l rv"><img src="img/ph/36.jpg" alt="Сурок" loading="lazy"><figcaption>Подбираю слова для Style</figcaption></figure>
   <div class="wrap">
     <div class="narrow">
       <div class="head rv"><div class="big-n">02</div><div><h2>Готовые стили</h2><span class="say"><img src="img/surok_ava.png" alt="">«Скопируй и не мучайся»</span></div></div>
@@ -322,6 +350,7 @@ footer.in .peek{transform:translateY(8%)}
 </section>
 
 <section id="s3">
+  <figure class="sticker  rv"><img src="img/ph/56.jpg" alt="Сурок" loading="lazy"><figcaption>Спорим, какой вариант лучше</figcaption></figure>
   <div class="wrap">
     <div class="narrow">
       <div class="head rv"><div class="big-n">03</div><div><h2>Если почти нравится</h2><span class="say"><img src="img/surok_ava.png" alt="">«Не выбрасываем, докручиваем»</span></div></div>
@@ -339,6 +368,7 @@ footer.in .peek{transform:translateY(8%)}
 </section>
 
 <section id="s4">
+  <figure class="sticker l rv"><img src="img/ph/32.jpg" alt="Сурок" loading="lazy"><figcaption>Скачал один и доволен</figcaption></figure>
   <div class="wrap narrow">
     <div class="head rv"><div class="big-n">04</div><div><h2>Скачать и передать</h2><span class="say"><img src="img/surok_ava.png" alt="">«Качаем только утверждённое»</span></div></div>
     <ol class="steps">
@@ -353,6 +383,7 @@ footer.in .peek{transform:translateY(8%)}
 </section>
 
 <section id="s5">
+  <figure class="sticker  rv"><img src="img/ph/33.jpg" alt="Сурок" loading="lazy"><figcaption>Чужое из Explore не берём</figcaption></figure>
   <div class="wrap">
     <div class="narrow">
       <div class="head rv"><div class="big-n">05</div><div><h2>Можно и нельзя</h2><span class="say"><img src="img/surok_ava.png" alt="">«Короче, запоминаем»</span></div></div>
@@ -391,6 +422,20 @@ footer.in .peek{transform:translateY(8%)}
     </div>
   </div>
 </section>
+
+<section id="gal">
+  <div class="wrap">
+    <div class="head rv"><div class="big-n">★</div><div><h2>Сурки одобряют</h2><span class="say"><img src="img/surok_ava.png" alt="">«Узнали себя?»</span></div></div>
+    <div class="gallery">
+      <figure class="rv"><img src="img/ph/57.jpg" alt="Сурок" loading="lazy"><figcaption>Трек утвердили!</figcaption></figure>
+      <figure class="rv"><img src="img/ph/51.jpg" alt="Сурок" loading="lazy"><figcaption>Suno выдал вокал на японском</figcaption></figure>
+      <figure class="rv"><img src="img/ph/58.jpg" alt="Сурок" loading="lazy"><figcaption>После 10-й генерации</figcaption></figure>
+      <figure class="rv"><img src="img/ph/29.jpg" alt="Сурок" loading="lazy"><figcaption>Проверяю, включён ли Instrumental</figcaption></figure>
+      <figure class="rv"><img src="img/ph/35.jpg" alt="Сурок" loading="lazy"><figcaption>Слушаю трек до конца</figcaption></figure>
+      <figure class="rv"><img src="img/ph/34.jpg" alt="Сурок" loading="lazy"><figcaption>Жду, пока сгенерится</figcaption></figure>
+    </div>
+  </div>
+</section>
 </main>
 
 <footer id="end">
@@ -398,6 +443,7 @@ footer.in .peek{transform:translateY(8%)}
     <div class="rv"><h2>Разобрались</h2><p>Если что-то не получается или кнопки выглядят иначе, пишите Илье, разберёмся вместе. Успехов в работе!</p></div>
     <img class="peek" src="img/surki_flip.png" alt="Сурки машут на прощание">
   </div>
+  <div class="wrap"><p class="credits">Фото сурков: <a href="https://commons.wikimedia.org/wiki/File:Groundhog_Female_Standing.jpg" target="_blank" rel="noopener">LadyCamera</a> (CC BY-SA 4.0); <a href="https://commons.wikimedia.org/wiki/File:Afraid_Marmot_(60796772).jpeg" target="_blank" rel="noopener">Stefano Bodini</a> (CC BY-SA 3.0); <a href="https://commons.wikimedia.org/wiki/File:Hoary_marmots_(Marmota_caligata_cascadensis)_wrestling_Whistler.jpg" target="_blank" rel="noopener">Charles J. Sharp</a> (CC BY-SA 4.0); <a href="https://commons.wikimedia.org/wiki/File:Marmota_marmota_07.jpg" target="_blank" rel="noopener">Kuebi = Armin Kübelbeck</a> (CC BY-SA 3.0); <a href="https://commons.wikimedia.org/wiki/File:Marmots_Eating_Trash.jpg" target="_blank" rel="noopener">Cullen328</a> (CC BY 3.0); <a href="https://commons.wikimedia.org/wiki/File:Hoary_marmots_(Marmota_caligata_cascadensis)_wrestling_Whistler_2.jpg" target="_blank" rel="noopener">Charles J. Sharp</a> (CC BY-SA 4.0); <a href="https://commons.wikimedia.org/wiki/File:Hoary_marmot_(Marmota_caligata_cascadensis)_Whistler_3.jpg" target="_blank" rel="noopener">Charles J. Sharp</a> (CC BY-SA 4.0); <a href="https://commons.wikimedia.org/wiki/File:Marmota_monax_UL_04.jpg" target="_blank" rel="noopener">Cephas</a> (CC BY-SA 3.0); <a href="https://commons.wikimedia.org/wiki/File:Marmot_Peek-a-boo_(3169605160).jpg" target="_blank" rel="noopener">Jeffrey Pang from Berkeley, CA, USA</a> (CC BY 2.0); <a href="https://commons.wikimedia.org/wiki/File:Yellow-bellied_Marmot_on_Tundra_(51699794884).jpg" target="_blank" rel="noopener">Great Sand Dunes National Park and Prese</a> (Public domain); <a href="https://commons.wikimedia.org/wiki/File:Yelllow-bellied_Marmot_(53501805653).jpg" target="_blank" rel="noopener">Great Sand Dunes National Park and Prese</a> (Public domain). Источник — Wikimedia Commons.</p></div>
 </footer>
 
 <script>
@@ -431,6 +477,11 @@ function place(){const h=document.documentElement,max=h.scrollHeight-h.clientHei
 addEventListener('scroll',()=>{const dy=scrollY-lastY;lastY=scrollY;place();
   if(Math.abs(dy)>0){run.classList.add('go');run.classList.toggle('down',dy>0);ri.style.scale=dy<0?'-1 1':'';clearTimeout(stopT);stopT=setTimeout(()=>{run.classList.remove('go');ri.style.scale=''},160)}},{passive:true});
 addEventListener('resize',place);place();
+
+// клик по суркам — новая реплика
+const phr=['Ща всё покажем','Instrumental включила?','Только Custom!','Пять попыток и хватит','Не качай всё подряд','Дослушай до конца','Скопируй стиль, не мучайся','Мы в тебя верим'];let pi=0;
+const mb=document.querySelector('.mascot .bubble');
+document.querySelector('.mascot').addEventListener('click',()=>{pi=(pi+1)%phr.length;mb.textContent=phr[pi];mb.style.animation='none';mb.classList.remove('re');void mb.offsetWidth;mb.style.transform='rotate(-6deg) scale(1)';mb.classList.add('re')});
 </script>
 </body>
 </html>
