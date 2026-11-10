@@ -1,0 +1,219 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Suno — инструкция для Эльвины</title>
+<meta name="robots" content="noindex">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+@font-face{font-family:Gilroy;src:url(../fonts/Gilroy-Medium.ttf) format('truetype');font-weight:500;font-display:swap}
+@font-face{font-family:Gilroy;src:url(../fonts/Gilroy-Bold.ttf) format('truetype');font-weight:700;font-display:swap}
+@font-face{font-family:Gilroy;src:url(../fonts/Gilroy-Heavy.ttf) format('truetype');font-weight:900;font-display:swap}
+:root{
+  --bg:#07090c; --ink:#e9edf2; --dim:#8a95a1; --mute:#5c6773; --line:rgba(255,255,255,.09);
+  --card:rgba(20,25,32,.78); --card2:rgba(30,36,45,.9);
+  --warm:#ffb37a; --cold:#82aaff; --red:#ff4d4d; --green:#5ee39a;
+  --disp:'Gilroy',-apple-system,system-ui,sans-serif; --mono:'JetBrains Mono',ui-monospace,Menlo,monospace;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--ink);font-family:var(--disp);font-weight:500;font-size:18px;line-height:1.55;overflow-x:hidden;-webkit-font-smoothing:antialiased}
+body::before{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;
+  background:radial-gradient(60% 50% at 85% 0%,rgba(130,170,255,.14),transparent 70%),radial-gradient(50% 40% at 0% 30%,rgba(255,179,122,.10),transparent 70%)}
+.wrap{width:min(860px,100% - 32px);margin:0 auto}
+.tag{font:500 12px var(--mono);letter-spacing:.14em;text-transform:uppercase;color:var(--dim);display:inline-flex;gap:10px;align-items:center}
+.tag i{width:8px;height:8px;border-radius:50%;background:var(--red);box-shadow:0 0 12px var(--red);animation:rec 1.4s infinite}
+@keyframes rec{50%{opacity:.25}}
+header{padding:88px 0 40px}
+h1{font-weight:900;font-size:clamp(44px,8vw,92px);line-height:.95;letter-spacing:-.02em;margin:18px 0 22px}
+h1 span{background:linear-gradient(90deg,var(--warm),var(--cold));-webkit-background-clip:text;background-clip:text;color:transparent}
+.lead{font-size:clamp(18px,2.2vw,22px);color:#c9d1da;max-width:680px}
+.lead p+p{margin-top:12px}
+nav.toc{display:flex;flex-wrap:wrap;gap:8px;margin-top:30px}
+nav.toc a{font:500 13px var(--mono);text-decoration:none;color:var(--ink);border:1px solid var(--line);background:var(--card);padding:8px 12px;border-radius:999px}
+nav.toc a:hover{border-color:var(--cold)}
+section{padding:56px 0 8px;border-top:1px solid var(--line);margin-top:40px}
+h2{font-weight:900;font-size:clamp(30px,4.6vw,48px);line-height:1.05;letter-spacing:-.01em;margin:10px 0 18px}
+h2 .n{font:500 14px var(--mono);color:var(--warm);display:block;letter-spacing:.14em;margin-bottom:6px}
+p{margin:12px 0}
+a{color:var(--cold)}
+b,strong{font-weight:700;color:#fff}
+.btn{display:inline-block;font:700 .82em var(--disp);background:var(--card2);border:1px solid rgba(255,255,255,.18);border-bottom-width:3px;border-radius:8px;padding:1px 8px;color:#fff;white-space:nowrap}
+code{font:500 .85em var(--mono);background:rgba(130,170,255,.12);color:#cfe0ff;padding:2px 6px;border-radius:6px}
+ol.steps{list-style:none;counter-reset:s;margin:22px 0;display:grid;gap:12px}
+ol.steps li{counter-increment:s;position:relative;background:var(--card);border:1px solid var(--line);border-radius:16px;padding:16px 18px 16px 66px}
+ol.steps li::before{content:counter(s);position:absolute;left:16px;top:14px;width:36px;height:36px;border-radius:50%;display:grid;place-items:center;font:900 17px var(--disp);color:#07090c;background:linear-gradient(135deg,var(--warm),var(--cold))}
+.meme{margin:28px 0;text-align:center}
+.meme img{width:100%;max-width:560px;border-radius:18px;border:1px solid var(--line);box-shadow:0 18px 50px rgba(0,0,0,.45);transform:rotate(-1deg);transition:transform .25s}
+.meme:nth-of-type(even) img{transform:rotate(1deg)}
+.meme img:hover{transform:rotate(0) scale(1.02)}
+.meme figcaption{font:500 12px var(--mono);color:var(--mute);margin-top:10px;letter-spacing:.06em}
+pre.tpl{font:500 15px/1.6 var(--mono);background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px 18px;color:#cfe0ff;overflow-x:auto}
+.styles{display:grid;gap:12px;margin:22px 0}
+.style{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:16px 18px}
+.style h3{font-weight:700;font-size:19px;margin-bottom:8px}
+.style .row{display:flex;gap:10px;align-items:flex-start}
+.style code{flex:1;display:block;padding:10px 12px;font-size:14px;line-height:1.5;word-break:break-word}
+.copy{flex:none;font:700 13px var(--disp);background:linear-gradient(135deg,var(--warm),var(--cold));color:#07090c;border:0;border-radius:10px;padding:10px 14px;cursor:pointer}
+.copy.ok{background:var(--green)}
+ul.fix{list-style:none;display:grid;gap:12px;margin:22px 0}
+ul.fix li{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:16px 18px}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:22px 0}
+.col{border-radius:18px;padding:18px;border:1px solid var(--line)}
+.col.yes{background:linear-gradient(180deg,rgba(94,227,154,.12),var(--card))}
+.col.no{background:linear-gradient(180deg,rgba(255,77,77,.12),var(--card))}
+.col h3{font-weight:900;font-size:22px;margin-bottom:10px}
+.col.yes h3{color:var(--green)} .col.no h3{color:var(--red)}
+.col ul{list-style:none;display:grid;gap:10px}
+.col li{padding-left:28px;position:relative}
+.col.yes li::before{content:"✓";position:absolute;left:0;color:var(--green);font-weight:900}
+.col.no li::before{content:"✕";position:absolute;left:0;color:var(--red);font-weight:900}
+.note{background:rgba(255,179,122,.08);border:1px solid rgba(255,179,122,.25);border-radius:14px;padding:14px 16px;color:#f3dcc8}
+footer{padding:60px 0 80px;color:var(--dim);font-size:17px}
+footer .big{font-weight:900;font-size:clamp(28px,4vw,40px);color:var(--ink);margin-bottom:8px}
+@media (max-width:640px){
+  body{font-size:17px}
+  header{padding:56px 0 24px}
+  .two{grid-template-columns:1fr}
+  ol.steps li{padding-left:58px}
+  ol.steps li::before{left:12px}
+  .style .row{flex-direction:column}
+  .copy{align-self:flex-start}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header>
+  <span class="tag"><i></i>инструкция · ноябрь 2026</span>
+  <h1>Музыка в <span>Suno</span><br>без паники</h1>
+  <div class="lead">
+    <p>Эльвина, здравствуйте! Здесь по шагам и простыми словами расписано, как сделать в Suno музыку для ролика: куда нажимать, что писать и чего лучше не делать.</p>
+    <p>Suno пишет музыку по текстовому описанию. Вы описываете жанр, настроение и темп, а через минуту получаете два варианта трека. Для роликов обычно нужна музыка без голоса, поэтому вся инструкция про инструментальные треки.</p>
+  </div>
+  <nav class="toc">
+    <a href="#create">1. Сделать трек</a>
+    <a href="#styles">2. Готовые стили</a>
+    <a href="#fix">3. Доработать</a>
+    <a href="#download">4. Скачать</a>
+    <a href="#rules">5. Можно и нельзя</a>
+  </nav>
+</header>
+
+<section id="create">
+  <h2><span class="n">ШАГ 01</span>Как сделать трек</h2>
+  <p>На один трек уходит 5–10 минут. Делайте всё по порядку:</p>
+
+  <figure class="meme"><img src="img/2_knopki_simple_custom.jpg" alt="Мем: выбор между Simple и Custom" loading="lazy"><figcaption>спойлер: жмём Custom</figcaption></figure>
+
+  <ol class="steps">
+    <li>Откройте сайт <a href="https://suno.com" target="_blank" rel="noopener">suno.com</a> и нажмите <span class="btn">Sign in</span> в правом верхнем углу. Проще всего войти через Google.</li>
+    <li>В меню слева нажмите <span class="btn">Create</span>. Откроется окно создания трека.</li>
+    <li>Вверху окна переключитесь с <span class="btn">Simple</span> на <span class="btn">Custom</span>. В этом режиме можно точно задать, какая нужна музыка.</li>
+    <li>Рядом выберите модель <span class="btn">v6</span>: это самая новая версия.</li>
+    <li>Включите переключатель <span class="btn">Instrumental</span>, чтобы в треке не было пения. <b>Это самый важный шаг.</b></li>
+    <li>В поле <span class="btn">Style</span> вставьте описание музыки на английском. Готовые варианты есть в следующем разделе, их можно просто скопировать.</li>
+    <li>В поле <span class="btn">Exclude Styles</span> напишите, чего в музыке быть не должно, например <code>vocals, choir</code>, то есть «без голоса и без хора».</li>
+    <li>В поле <span class="btn">Title</span> напишите название, чтобы потом легко найти трек, например «Тизер Аня — вариант 1».</li>
+    <li>Нажмите оранжевую кнопку <span class="btn">Create</span> внизу. Через минуту справа появятся два варианта.</li>
+    <li>Послушайте оба, нажав на обложку трека. Если не нравится, нажмите <span class="btn">Create</span> ещё раз. Обычно хороший вариант получается с 3–5 попытки.</li>
+    <li>Понравившийся трек отметьте лайком, чтобы не потерять его среди остальных.</li>
+  </ol>
+
+  <figure class="meme"><img src="img/3_gru_instrumental.jpg" alt="Мем: забыла включить Instrumental" loading="lazy"><figcaption>поэтому шаг 5 — самый важный</figcaption></figure>
+
+  <p>Поле <span class="btn">Lyrics</span> для музыки без голоса можно не заполнять. Но туда можно вписать план трека в квадратных скобках, чтобы музыка сначала нарастала, а потом «взрывалась»:</p>
+<pre class="tpl">[Intro]
+[Build]
+[Drop]
+[Outro]</pre>
+  <p>Intro — спокойное начало, Build — нарастание, Drop — самая яркая часть, Outro — концовка.</p>
+</section>
+
+<section id="styles">
+  <h2><span class="n">ШАГ 02</span>Готовые стили: скопируйте в поле Style</h2>
+  <p>Нажмите «Скопировать» и вставьте строку в поле Style целиком. Число с bpm — это темп: чем больше число, тем быстрее музыка.</p>
+
+  <div class="styles">
+    <div class="style"><h3>Тизер или трейлер: напряжение и мощные удары</h3><div class="row"><code>modern trailer, epic hybrid, tense build, pounding drums, braams, risers, 120 bpm, cinematic, big hits</code><button class="copy">Скопировать</button></div></div>
+    <div class="style"><h3>Динамичный рилс</h3><div class="row"><code>electro trap, energetic, heavy 808 bass, punchy drums, sidechain, 140 bpm, modern</code><button class="copy">Скопировать</button></div></div>
+    <div class="style"><h3>Спокойная подложка под речь эксперта</h3><div class="row"><code>minimal corporate electronic, calm, confident, soft plucks, light kick, 100 bpm, background, no lead melody</code><button class="copy">Скопировать</button></div></div>
+    <div class="style"><h3>Лёгкий lifestyle-ролик</h3><div class="row"><code>chill pop, warm, bright, soft guitar, finger snaps, 105 bpm, airy, modern</code><button class="copy">Скопировать</button></div></div>
+    <div class="style"><h3>Тёплая история, эмоции</h3><div class="row"><code>emotional piano, cinematic strings, slow build, hopeful, 80 bpm, warm</code><button class="copy">Скопировать</button></div></div>
+  </div>
+
+  <figure class="meme"><img src="img/5_brain_style.jpg" alt="Мем: как писать описание в поле Style" loading="lazy"><figcaption>чем точнее описание, тем умнее мозг</figcaption></figure>
+
+  <p><b>Как составить своё описание:</b> пишите слова через запятую в таком порядке: жанр, настроение, 2–3 инструмента, темп. Suno сильнее учитывает то, что написано в начале. Имена исполнителей писать нельзя, сервис их не принимает, поэтому описывайте звучание словами.</p>
+</section>
+
+<section id="fix">
+  <h2><span class="n">ШАГ 03</span>Если трек почти нравится</h2>
+  <p>Все эти кнопки спрятаны в меню трека: нажмите на три точки <span class="btn">⋯</span> рядом с ним. Пункты часто лежат в подменю <span class="btn">Remix/Edit</span> или <span class="btn">Create</span>.</p>
+  <ul class="fix">
+    <li><b>Трек слишком короткий.</b> Выберите <span class="btn">Extend</span>, укажите секунду, с которой продолжить, и нажмите <span class="btn">Create</span>. Suno допишет продолжение в том же стиле.</li>
+    <li><b>Не нравится кусочек.</b> Выберите <span class="btn">Replace Section</span> (или <span class="btn">Edit</span>) и выделите неудачный кусок на волне. Пересоздастся только он, остальное останется как было.</li>
+    <li><b>Нравится мелодия, но нужен другой стиль.</b> Выберите <span class="btn">Cover</span>, впишите новый стиль и нажмите <span class="btn">Create</span>.</li>
+    <li><b>Мелодия мешает голосу в ролике.</b> Выберите <span class="btn">Get Stems</span>: трек разложится на отдельные дорожки (барабаны, бас, мелодия), и в монтаже мелодию можно сделать тише.</li>
+  </ul>
+  <p>Каждое такое действие создаёт новый трек в списке, исходный никуда не пропадает.</p>
+
+  <figure class="meme"><img src="img/4_boyfriend_generacii.jpg" alt="Мем: ещё одна генерация" loading="lazy"><figcaption>3–5 попыток достаточно, честно</figcaption></figure>
+</section>
+
+<section id="download">
+  <h2><span class="n">ШАГ 04</span>Как скачать и передать трек</h2>
+  <ol class="steps">
+    <li>Нажмите на три точки <span class="btn">⋯</span> рядом с выбранным треком.</li>
+    <li>Выберите <span class="btn">Download</span>.</li>
+    <li>Выберите формат <span class="btn">WAV Audio</span>: у него лучшее качество. Если WAV нет, подойдёт MP3.</li>
+    <li>Файл сохранится в «Загрузки». Переименуйте его понятно, например «Тизер Аня — вариант 2.wav».</li>
+    <li>Отправьте файл Илье или положите в общую папку проекта.</li>
+  </ol>
+  <p class="note">Если музыку нужно сначала согласовать, скачивать ничего не надо: в меню <span class="btn">⋯</span> выберите <span class="btn">Share</span> → <span class="btn">Copy Link</span> и пришлите ссылку. По ней трек можно послушать прямо в браузере.</p>
+
+  <figure class="meme"><img src="img/6_fine_limit.jpg" alt="Мем: лимит скачиваний закончился" loading="lazy"><figcaption>число скачиваний в месяц ограничено</figcaption></figure>
+</section>
+
+<section id="rules">
+  <h2><span class="n">ШАГ 05</span>Что делать и чего не делать</h2>
+  <div class="two">
+    <div class="col yes"><h3>Стоит</h3><ul>
+      <li>Всегда работать в режиме Custom и включать Instrumental, если не просили песню.</li>
+      <li>Делать 3–5 попыток и выбирать лучшую, а не брать первый вариант.</li>
+      <li>Слушать трек целиком: иногда в середине появляется лишний голос или странный звук.</li>
+      <li>Называть треки понятно: проект и номер варианта.</li>
+      <li>Присылать на выбор 2–3 варианта ссылками, а скачивать уже выбранный.</li>
+      <li>Делать трек чуть длиннее ролика: лишнее легко обрезать в монтаже, а недостающее не добавишь.</li>
+    </ul></div>
+    <div class="col no"><h3>Не стоит</h3><ul>
+      <li>Писать в Style имена исполнителей или названия известных песен: сервис их не примет.</li>
+      <li>Писать описание на русском: на английском результат заметно точнее.</li>
+      <li>Перегружать описание: хватит 6–10 слов, иначе получится каша.</li>
+      <li>Скачивать все варианты подряд: число скачиваний в месяц ограничено.</li>
+      <li>Брать чужие треки из раздела Explore: права на них у их авторов. Используйте только то, что сделали сами.</li>
+      <li>Регистрировать треки как свою музыку на YouTube или в музыкальных сервисах.</li>
+    </ul></div>
+  </div>
+
+  <figure class="meme"><img src="img/1_drake_skachivanie.jpg" alt="Мем: что скачивать" loading="lazy"><figcaption>золотое правило</figcaption></figure>
+</section>
+
+<footer>
+  <div class="big">Готово!</div>
+  <p>Если что-то не получается или кнопки выглядят иначе, пишите Илье, разберёмся вместе. Успехов в работе!</p>
+</footer>
+
+</div>
+<script>
+document.querySelectorAll('.copy').forEach(b=>b.addEventListener('click',async()=>{
+  const t=b.parentElement.querySelector('code').innerText;
+  try{await navigator.clipboard.writeText(t)}catch(e){const r=document.createRange();r.selectNode(b.parentElement.querySelector('code'));getSelection().removeAllRanges();getSelection().addRange(r);document.execCommand('copy')}
+  b.textContent='Скопировано';b.classList.add('ok');setTimeout(()=>{b.textContent='Скопировать';b.classList.remove('ok')},1600);
+}));
+</script>
+</body>
+</html>
