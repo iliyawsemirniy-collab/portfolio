@@ -1,0 +1,463 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Илья · монтаж продающих видео</title>
+<meta name="description" content="Монтаж VSL и продающих роликов: графика на каждый смысл, удержание до кнопки «купить».">
+<meta property="og:title" content="Илья · монтаж продающих видео">
+<meta property="og:description" content="VSL, автовебинары, продающие ролики под курсы. Графика, которая держит внимание.">
+<meta property="og:image" content="media/og.jpg">
+<meta property="og:type" content="website">
+<meta name="theme-color" content="#07090c">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+@font-face{font-family:Gilroy;src:url(../fonts/Gilroy-Medium.ttf) format('truetype');font-weight:500;font-display:swap}
+@font-face{font-family:Gilroy;src:url(../fonts/Gilroy-Bold.ttf) format('truetype');font-weight:700;font-display:swap}
+@font-face{font-family:Gilroy;src:url(../fonts/Gilroy-Heavy.ttf) format('truetype');font-weight:900;font-display:swap}
+:root{
+  --bg:#07090c; --bg2:#0c1016; --ink:#eef1f5; --dim:#97a1ad; --mute:#5f6a77; --line:rgba(255,255,255,.08);
+  --glass:rgba(16,20,27,.62); --warm:#ffb37a; --hot:#ff5a3c; --cold:#82aaff; --mint:#7ef0c4;
+  --disp:'Gilroy',-apple-system,system-ui,sans-serif; --mono:'JetBrains Mono',ui-monospace,Menlo,monospace;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--ink);font-family:var(--disp);font-weight:500;overflow-x:hidden;-webkit-font-smoothing:antialiased;line-height:1.45}
+a{color:inherit;text-decoration:none}
+button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
+video{display:block}
+.wrap{width:min(1240px,100% - 32px);margin:0 auto}
+.mono{font-family:var(--mono)}
+.grain{position:fixed;inset:-50%;z-index:60;pointer-events:none;opacity:.06;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence baseFrequency='.85' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  animation:grain 1s steps(6) infinite}
+@keyframes grain{0%{transform:translate(0,0)}25%{transform:translate(-3%,2%)}50%{transform:translate(2%,-3%)}75%{transform:translate(-2%,-1%)}100%{transform:translate(1%,3%)}}
+
+/* плейхед-прогресс сверху */
+.ph{position:fixed;top:0;left:0;right:0;height:22px;z-index:55;pointer-events:none;background:linear-gradient(180deg,rgba(7,9,12,.9),transparent)}
+.ph .rul{position:absolute;left:0;right:0;top:0;height:8px;background:repeating-linear-gradient(90deg,rgba(255,255,255,.18) 0 1px,transparent 1px 24px)}
+.ph .head{position:absolute;top:0;width:2px;height:22px;background:var(--hot);box-shadow:0 0 10px var(--hot);left:0}
+.ph .head::before{content:"";position:absolute;top:0;left:-5px;border:6px solid transparent;border-top:8px solid var(--hot)}
+.ph .tc{position:absolute;top:6px;font:500 10px var(--mono);color:var(--hot);margin-left:8px;letter-spacing:.06em}
+
+nav.top{position:fixed;top:22px;left:0;right:0;z-index:50}
+nav.top .wrap{display:flex;justify-content:space-between;align-items:center;padding:10px 0}
+.brand{font-weight:900;letter-spacing:-.02em;font-size:18px}
+.brand span{color:var(--dim);font-weight:500;margin-left:8px;font-size:14px}
+.btn{display:inline-flex;align-items:center;gap:10px;padding:14px 22px;border-radius:999px;font-weight:700;font-size:15px;transition:transform .25s,box-shadow .25s,background .25s}
+.btn.hot{background:var(--hot);color:#140805;box-shadow:0 10px 40px -10px rgba(255,90,60,.7)}
+.btn.hot:hover{transform:translateY(-2px);box-shadow:0 16px 50px -10px rgba(255,90,60,.9)}
+.btn.ghost{border:1px solid var(--line);background:rgba(255,255,255,.03);backdrop-filter:blur(10px)}
+.btn.ghost:hover{background:rgba(255,255,255,.08)}
+.btn.sm{padding:10px 16px;font-size:13px}
+.tg{width:18px;height:18px;flex:none}
+
+/* HERO */
+.hero{position:relative;min-height:100svh;display:grid;align-items:center;overflow:hidden;isolation:isolate;padding:110px 0 60px}
+.hero video.bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:-3;filter:blur(28px) saturate(.8) brightness(.45);transform:scale(1.15)}
+.hero::before{content:"";position:absolute;inset:0;z-index:-2;background:radial-gradient(90% 70% at 70% 45%,transparent,rgba(7,9,12,.75) 65%,var(--bg) 100%),linear-gradient(180deg,transparent 60%,var(--bg))}
+.hero .wrap{display:grid;grid-template-columns:.92fr 1.08fr;gap:56px;align-items:center}
+.tag{font:500 12px var(--mono);display:inline-flex;gap:10px;align-items:center;letter-spacing:.14em;text-transform:uppercase;color:var(--dim)}
+.tag i{width:8px;height:8px;border-radius:50%;background:var(--hot);box-shadow:0 0 12px var(--hot);animation:rec 1.4s infinite}
+@keyframes rec{50%{opacity:.25}}
+h1{font-weight:900;font-size:clamp(40px,5.6vw,80px);line-height:.95;letter-spacing:-.035em;margin:22px 0 22px}
+h1 em{font-style:normal;color:transparent;background:linear-gradient(90deg,var(--warm),var(--hot));-webkit-background-clip:text;background-clip:text}
+.lead{font-size:clamp(16px,1.35vw,19px);color:var(--dim);max-width:520px}
+.lead b{color:var(--ink);font-weight:700}
+.cta-row{display:flex;gap:12px;flex-wrap:wrap;margin-top:30px}
+
+/* монитор с шоурилом */
+.mon{position:relative;border-radius:18px;padding:10px;background:linear-gradient(180deg,rgba(255,255,255,.08),rgba(255,255,255,.02));border:1px solid var(--line);box-shadow:0 40px 120px -30px rgba(0,0,0,.9),0 0 0 1px rgba(0,0,0,.4) inset}
+.mon .scr{position:relative;border-radius:10px;overflow:hidden;aspect-ratio:16/9;background:#000}
+.mon video{width:100%;height:100%;object-fit:cover}
+.mon .snd{position:absolute;left:14px;bottom:14px;display:flex;gap:8px;align-items:center;padding:9px 14px;border-radius:999px;background:rgba(7,9,12,.7);backdrop-filter:blur(8px);border:1px solid var(--line);font:500 12px var(--mono);letter-spacing:.06em}
+.mon .snd svg{width:16px;height:16px}
+.mon .lbl{position:absolute;right:14px;top:14px;font:500 11px var(--mono);letter-spacing:.12em;padding:6px 10px;border-radius:6px;background:rgba(7,9,12,.66);color:var(--warm);text-transform:uppercase;transition:opacity .3s}
+.tline{margin-top:10px;padding:10px 10px 8px;border-radius:10px;background:rgba(7,9,12,.75);border:1px solid var(--line)}
+.tline .hdr{display:flex;justify-content:space-between;font:500 11px var(--mono);color:var(--mute);margin-bottom:8px}
+.tline .hdr b{color:var(--ink);font-weight:500}
+.lane{position:relative;display:flex;gap:2px;height:30px;cursor:pointer}
+.lane .seg{position:relative;flex:var(--d) 1 0;border-radius:4px;overflow:hidden;background:var(--c);opacity:.55;transition:opacity .2s}
+.lane .seg:hover,.lane .seg.on{opacity:1}
+.lane .seg::after{content:attr(data-n);position:absolute;left:5px;top:50%;transform:translateY(-50%);font:500 9px var(--mono);color:rgba(0,0,0,.75);white-space:nowrap;overflow:hidden;max-width:calc(100% - 6px)}
+.lane.a{height:14px;margin-top:3px}
+.lane.a .seg{opacity:.3;background:repeating-linear-gradient(90deg,var(--c) 0 2px,transparent 2px 4px)}
+.lane.a .seg::after{display:none}
+.tline .playhead{position:absolute;top:-4px;bottom:-21px;width:2px;background:#fff;box-shadow:0 0 8px #fff;pointer-events:none;left:0}
+.leg{display:flex;gap:14px;flex-wrap:wrap;margin-top:8px;font:500 10.5px var(--mono);color:var(--dim)}
+.leg i{display:inline-block;width:9px;height:9px;border-radius:2px;margin-right:6px;vertical-align:-1px}
+
+/* цифры */
+.stats{display:grid;grid-template-columns:repeat(4,1fr);border-top:1px solid var(--line);border-bottom:1px solid var(--line);margin-top:20px}
+.stats div{padding:26px 22px;border-right:1px solid var(--line)}
+.stats div:last-child{border-right:0}
+.stats b{display:block;font-weight:900;font-size:clamp(28px,3.2vw,44px);letter-spacing:-.03em;line-height:1}
+.stats span{display:block;color:var(--dim);font-size:14px;margin-top:8px}
+
+section{padding:110px 0 0}
+.kick{font:500 12px var(--mono);letter-spacing:.16em;text-transform:uppercase;color:var(--warm)}
+h2{font-weight:900;font-size:clamp(32px,4.4vw,60px);line-height:1;letter-spacing:-.03em;margin:14px 0 16px;max-width:900px}
+.sub{color:var(--dim);font-size:clamp(15px,1.25vw,18px);max-width:640px}
+
+/* АНАТОМИЯ */
+.anat-top{display:flex;justify-content:space-between;align-items:flex-end;gap:24px}
+.arrows{display:flex;gap:8px}
+.arrows button{width:46px;height:46px;border-radius:50%;border:1px solid var(--line);background:rgba(255,255,255,.03);display:grid;place-items:center;transition:background .2s}
+.arrows button:hover{background:rgba(255,255,255,.1)}
+.rail-wrap{position:relative;margin-top:36px}
+.rail{display:flex;gap:18px;overflow-x:auto;scroll-snap-type:x mandatory;padding:0 max(16px,calc((100vw - 1240px)/2)) 24px;scrollbar-width:none}
+.rail::-webkit-scrollbar{display:none}
+.stage{flex:0 0 min(420px,84vw);scroll-snap-align:start;border-radius:20px;background:var(--glass);border:1px solid var(--line);overflow:hidden;position:relative;transition:border-color .3s,transform .3s}
+.stage:hover{border-color:rgba(255,179,122,.4);transform:translateY(-4px)}
+.stage .vid{position:relative;aspect-ratio:16/9;background:#000;cursor:pointer;overflow:hidden}
+.stage .vid video{width:100%;height:100%;object-fit:cover}
+.stage .body{padding:20px 22px 24px}
+.stage .no{font:500 12px var(--mono);color:var(--mute);display:flex;justify-content:space-between}
+.stage .no b{color:var(--warm);font-weight:500}
+.stage h3{font-weight:900;font-size:28px;letter-spacing:-.02em;margin:8px 0 8px}
+.stage p{color:var(--dim);font-size:15px}
+.stage .feel{margin-top:14px;padding-top:14px;border-top:1px dashed var(--line);font-size:13.5px;color:var(--ink)}
+.stage .feel span{font:500 11px var(--mono);color:var(--mute);letter-spacing:.1em;text-transform:uppercase;display:block;margin-bottom:4px}
+.progress{height:2px;background:var(--line);margin:0 auto;width:min(1240px,100% - 32px);border-radius:2px;overflow:hidden}
+.progress i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--warm),var(--hot))}
+.play-ic{position:absolute;right:12px;bottom:12px;width:38px;height:38px;border-radius:50%;background:rgba(7,9,12,.65);backdrop-filter:blur(6px);display:grid;place-items:center;border:1px solid var(--line);opacity:0;transform:scale(.8);transition:.25s}
+.vid:hover .play-ic,.cell:hover .play-ic{opacity:1;transform:none}
+.play-ic svg{width:14px;height:14px;margin-left:2px}
+
+/* ПРИЁМЫ bento */
+.bento{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:40px;align-items:stretch}
+.cell{position:relative;border-radius:18px;overflow:hidden;background:var(--glass);border:1px solid var(--line);cursor:pointer;display:flex;flex-direction:column;transition:border-color .3s,transform .3s}
+.cell:hover{border-color:rgba(255,179,122,.4);transform:translateY(-3px)}
+.cell .v{position:relative;aspect-ratio:16/9;background:#000;overflow:hidden}
+.cell.h2 .v{aspect-ratio:auto;flex:1;min-height:200px}
+.cell video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform .6s}
+.cell:hover video{transform:scale(1.04)}
+.cell .cap{padding:14px 18px 16px}
+.cell .cap b{display:block;font-weight:900;font-size:clamp(16px,1.4vw,20px);letter-spacing:-.015em;line-height:1.15}
+.cell .cap span{display:block;color:var(--dim);font-size:13.5px;margin-top:5px}
+.cell .chip{position:absolute;left:12px;top:12px;font:500 10.5px var(--mono);letter-spacing:.1em;text-transform:uppercase;padding:5px 9px;border-radius:6px;background:rgba(7,9,12,.62);backdrop-filter:blur(6px);color:var(--warm);z-index:2}
+.w2{grid-column:span 2}.h2{grid-row:span 2}
+
+/* КЕЙС */
+.case{display:grid;grid-template-columns:1fr 1fr;gap:40px;margin-top:40px;align-items:start}
+.case .card{border-radius:20px;background:var(--glass);border:1px solid var(--line);padding:26px}
+.case dl{display:grid;gap:18px}
+.case dt{font:500 11px var(--mono);letter-spacing:.14em;text-transform:uppercase;color:var(--mute)}
+.case dd{margin-top:6px;color:var(--ink);font-size:16px}
+.case dd ul{list-style:none;display:grid;gap:7px;margin-top:4px}
+.case dd li{padding-left:18px;position:relative;color:var(--dim)}
+.case dd li::before{content:"";position:absolute;left:0;top:.62em;width:8px;height:2px;background:var(--warm)}
+.density{margin-top:26px;border-radius:20px;background:var(--bg2);border:1px solid var(--line);padding:22px 22px 18px}
+.density .hd{display:flex;justify-content:space-between;align-items:baseline;gap:12px;flex-wrap:wrap}
+.density .hd b{font-weight:900;font-size:20px}
+.density .hd span{font:500 12px var(--mono);color:var(--dim)}
+.dtrack{position:relative;height:84px;margin-top:20px;border-radius:8px;background:repeating-linear-gradient(90deg,rgba(255,255,255,.035) 0 1px,transparent 1px calc(100%/35));border:1px solid var(--line)}
+.dtrack .mk{position:absolute;bottom:0;width:max(3px,var(--w));min-width:3px;border-radius:2px 2px 0 0;background:linear-gradient(180deg,var(--warm),var(--hot));height:var(--h);opacity:.8;cursor:pointer;transition:opacity .2s,filter .2s}
+.dtrack .mk:hover{opacity:1;filter:brightness(1.3)}
+.dscale{display:flex;justify-content:space-between;font:500 10.5px var(--mono);color:var(--mute);margin-top:6px}
+.dprev{position:absolute;bottom:96px;width:200px;transform:translateX(-50%);pointer-events:none;opacity:0;transition:opacity .15s;z-index:3}
+.dprev img{width:100%;border-radius:8px;border:1px solid rgba(255,255,255,.25);box-shadow:0 20px 40px rgba(0,0,0,.6);display:block}
+.dprev span{display:block;text-align:center;font:500 11px var(--mono);margin-top:4px;color:var(--warm)}
+
+/* полные ролики */
+.full{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:36px}
+.full a{display:block;border-radius:18px;border:1px solid var(--line);background:var(--glass);overflow:hidden;transition:transform .3s,border-color .3s}
+.full a:hover{transform:translateY(-4px);border-color:rgba(255,179,122,.4)}
+.full .th{aspect-ratio:16/9;position:relative;overflow:hidden;background:#000}
+.full .th img{width:100%;height:100%;object-fit:cover;filter:brightness(.85)}
+.full .th .yt{position:absolute;inset:0;display:grid;place-items:center}
+.full .th .yt i{width:58px;height:40px;border-radius:12px;background:rgba(255,40,40,.92);display:grid;place-items:center}
+.full .t{padding:16px 18px 18px}
+.full .t span{font:500 11px var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--mute)}
+.full .t b{display:block;font-weight:700;font-size:17px;margin-top:6px;line-height:1.25}
+
+/* процесс */
+.steps{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:36px;counter-reset:s}
+.steps div{border-radius:18px;border:1px solid var(--line);padding:22px;background:linear-gradient(180deg,rgba(255,255,255,.035),transparent)}
+.steps div::before{counter-increment:s;content:"0" counter(s);font:500 12px var(--mono);color:var(--warm)}
+.steps b{display:block;font-weight:900;font-size:20px;margin:10px 0 8px;letter-spacing:-.01em}
+.steps p{color:var(--dim);font-size:14.5px}
+.tools{display:flex;gap:10px;flex-wrap:wrap;margin-top:22px}
+.tools span{font:500 12px var(--mono);padding:8px 12px;border-radius:8px;border:1px solid var(--line);color:var(--dim)}
+
+.final{margin:120px auto 0;text-align:center;padding:90px 20px 100px;border-top:1px solid var(--line);position:relative;overflow:hidden}
+.final::before{content:"";position:absolute;left:50%;top:0;width:900px;height:500px;transform:translate(-50%,-50%);background:radial-gradient(closest-side,rgba(255,90,60,.22),transparent);pointer-events:none}
+.final h2{margin:14px auto 16px}
+.final .sub{margin:0 auto}
+.final .cta-row{justify-content:center}
+footer{padding:24px 0 40px;color:var(--mute);font:500 12px var(--mono);text-align:center}
+
+/* модалка */
+dialog{border:0;padding:0;background:transparent;max-width:min(1100px,94vw);width:100%;margin:auto;color:var(--ink)}
+dialog::backdrop{background:rgba(3,4,6,.88);backdrop-filter:blur(8px)}
+dialog video{width:100%;border-radius:14px;background:#000;aspect-ratio:16/9}
+dialog .mh{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;gap:16px}
+dialog .mh b{font-weight:900;font-size:20px}
+dialog .x{width:42px;height:42px;border-radius:50%;border:1px solid var(--line);background:rgba(255,255,255,.06);font-size:20px;flex:none}
+
+/* появления */
+.rv{opacity:0;transform:translateY(26px);transition:opacity .8s cubic-bezier(.2,.7,.2,1),transform .8s cubic-bezier(.2,.7,.2,1)}
+.rv.in{opacity:1;transform:none}
+.d1{transition-delay:.08s}.d2{transition-delay:.16s}.d3{transition-delay:.24s}
+
+@media (max-width:980px){
+  .hero .wrap{grid-template-columns:1fr;gap:36px}
+  .stats{grid-template-columns:1fr 1fr}
+  .stats div:nth-child(2){border-right:0}
+  .stats div:nth-child(-n+2){border-bottom:1px solid var(--line)}
+  .bento{grid-template-columns:1fr 1fr}
+  .case{grid-template-columns:1fr}
+  .full{grid-template-columns:1fr}
+  .steps{grid-template-columns:1fr 1fr}
+}
+@media (max-width:600px){
+  section{padding-top:80px}
+  .hero{padding-top:96px}
+  .brand span{display:none}
+  .bento{grid-template-columns:1fr}
+  .w2,.h2{grid-column:auto;grid-row:auto}
+  
+  .steps{grid-template-columns:1fr}
+  .stats div{padding:20px 16px}
+  .anat-top .arrows{display:none}
+  .lane .seg::after{display:none}
+  .dprev{width:150px}
+}
+@media (prefers-reduced-motion:reduce){.rv{opacity:1;transform:none;transition:none}.grain{animation:none}}
+</style>
+</head>
+<body>
+<div class="grain"></div>
+<div class="ph"><div class="rul"></div><div class="head" id="phHead"><span class="tc" id="phTc">00:00:00</span></div></div>
+
+<nav class="top"><div class="wrap">
+  <div class="brand">Илья<span>монтаж продающих видео</span></div>
+  <a class="btn ghost sm" href="https://t.me/Ilushkaxr" target="_blank" rel="noopener"><svg class="tg" viewBox="0 0 24 24" fill="currentColor"><path d="M21.9 4.3 18.7 19.4c-.2 1-.9 1.3-1.8.8l-4.9-3.6-2.4 2.3c-.3.3-.5.5-1 .5l.3-5 9.2-8.3c.4-.4-.1-.6-.6-.2L6.1 13 1.2 11.5c-1-.3-1-1 .2-1.5L20.6 2.6c.9-.3 1.6.2 1.3 1.7z"/></svg>Написать</a>
+</div></nav>
+
+<header class="hero">
+  <video class="bg" src="media/bg.mp4" autoplay muted loop playsinline preload="auto"></video>
+  <div class="wrap">
+    <div>
+      <div class="tag rv"><i></i>VSL · автовебинары · продающие ролики</div>
+      <h1 class="rv d1">Держу внимание до&nbsp;кнопки <em>«купить»</em></h1>
+      <p class="lead rv d2">Монтирую длинные продающие ролики под курсы, клубы и&nbsp;консультации. <b>Графика на&nbsp;каждый смысл</b>: хук, боль, доверие, метод, оффер, призыв. Зритель не&nbsp;успевает заскучать и&nbsp;понимает, за&nbsp;что платит.</p>
+      <div class="cta-row rv d3">
+        <button class="btn hot" id="reelSound"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M6 4l15 8-15 8z"/></svg>Шоурил со&nbsp;звуком · 1:21</button>
+        <a class="btn ghost" href="#anatomy">Как я&nbsp;собираю VSL</a>
+      </div>
+    </div>
+    <div class="rv d2">
+      <div class="mon">
+        <div class="scr">
+          <video id="reel" src="media/reel.mp4" poster="media/reel.jpg" autoplay muted loop playsinline preload="auto"></video>
+          <span class="lbl" id="reelLbl">продающий ролик</span>
+          <button class="snd" id="reelMute"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 5 6 9H2v6h4l5 4V5z"/><path id="sw" d="m23 9-6 6m0-6 6 6"/></svg><span id="sndT">ЗВУК ВЫКЛ</span></button>
+        </div>
+        <div class="tline">
+          <div class="hdr"><span>SHOWREEL_VSL.prproj</span><b id="tlTc">00:00 / 01:21</b></div>
+          <div style="position:relative">
+            <div class="lane" id="laneV"></div>
+            <div class="lane a" id="laneA"></div>
+            <div class="playhead" id="tlHead"></div>
+          </div>
+          <div class="leg"><span><i style="background:var(--warm)"></i>продающий ролик</span><span><i style="background:var(--mint)"></i>медицинский блог</span><span><i style="background:var(--cold)"></i>тизер подкаста</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<div class="wrap">
+  <div class="stats rv">
+    <div><b>35 мин</b><span>самый длинный продающий ролик, графика от&nbsp;первой до&nbsp;последней минуты</span></div>
+    <div><b>≈50</b><span>графических вставок в&nbsp;одном ролике</span></div>
+    <div><b>4 года</b><span>в&nbsp;монтаже: врачи, инфобиз, эксперты, подкасты</span></div>
+    <div><b>под ключ</b><span>монтаж, графика, звук, цвет, субтитры</span></div>
+  </div>
+</div>
+
+<section id="anatomy">
+  <div class="wrap anat-top">
+    <div>
+      <div class="kick rv">Анатомия VSL</div>
+      <h2 class="rv d1">Каждый этап ролика решает свою задачу. И&nbsp;графика тоже</h2>
+      <p class="sub rv d2">Я не&nbsp;вешаю эффекты ради эффектов. Под каждый блок сценария свой приём: от&nbsp;хука в&nbsp;первые секунды до&nbsp;кнопки в&nbsp;конце. Ниже живые куски из&nbsp;моих роликов.</p>
+    </div>
+    <div class="arrows"><button id="prev" aria-label="Назад"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m15 18-6-6 6-6"/></svg></button><button id="next" aria-label="Вперёд"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m9 18 6-6-6-6"/></svg></button></div>
+  </div>
+  <div class="rail-wrap"><div class="rail" id="rail"></div></div>
+  <div class="progress"><i id="railBar"></i></div>
+</section>
+
+<section id="tricks">
+  <div class="wrap">
+    <div class="kick rv">Приёмы</div>
+    <h2 class="rv d1">Чем я&nbsp;держу внимание</h2>
+    <p class="sub rv d2">Наведите на&nbsp;карточку, чтобы посмотреть, нажмите, чтобы включить со&nbsp;звуком.</p>
+    <div class="bento" id="bento"></div>
+  </div>
+</section>
+
+<section id="case">
+  <div class="wrap">
+    <div class="kick rv">Кейс</div>
+    <h2 class="rv d1">Продающий ролик на&nbsp;35 минут для онлайн-курса</h2>
+    <p class="sub rv d2">Эксперт полчаса говорит в&nbsp;кадре. Задача: чтобы досмотрели до&nbsp;оффера и&nbsp;нажали кнопку.</p>
+    <div class="case">
+      <div class="card rv">
+        <dl>
+          <div><dt>Что было</dt><dd>Длинная говорящая голова, один интерьер, сложная тема про методологию из&nbsp;четырёх этапов.</dd></div>
+          <div><dt>Что сделал</dt><dd><ul>
+            <li>Хук с&nbsp;обратным отсчётом и&nbsp;вопросами к&nbsp;зрителю</li>
+            <li>Неоновые ключевые слова прямо в&nbsp;интерьере</li>
+            <li>Методологию разложил в&nbsp;схемы и&nbsp;таблицы</li>
+            <li>Доверие: цифры, площадки, дипломы, фото с&nbsp;учениками</li>
+            <li>Мемы и&nbsp;стоки, чтобы разбить длинные куски</li>
+            <li>Смена планов, чтобы кадр не&nbsp;застывал</li>
+          </ul></dd></div>
+          <div><dt>Итог</dt><dd>Около 50 графических вставок, ни&nbsp;одного длинного провиса без смены картинки.</dd></div>
+        </dl>
+      </div>
+      <div class="rv d1">
+        <div class="cell" data-k="method"><div class="v"><video data-src="media/method.mp4" muted loop playsinline preload="none" poster="media/method.jpg"></video><span class="chip">метод в&nbsp;схеме</span><span class="play-ic"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M6 4l15 8-15 8z"/></svg></span></div></div>
+        <div class="bento" style="grid-template-columns:1fr 1fr;margin-top:14px">
+          <div class="cell" data-k="trust"><div class="v"><video data-src="media/trust.mp4" muted loop playsinline preload="none" poster="media/trust.jpg"></video><span class="chip">цифры</span></div></div>
+          <div class="cell" data-k="proof"><div class="v"><video data-src="media/proof.mp4" muted loop playsinline preload="none" poster="media/proof.jpg"></video><span class="chip">доказательства</span></div></div>
+        </div>
+      </div>
+    </div>
+    <div class="density rv">
+      <div class="hd"><b>Графика по&nbsp;таймлайну ролика</b><span>каждая полоска = вставка · наведите</span></div>
+      <div class="dtrack" id="dtrack"><div class="dprev" id="dprev"><img alt=""><span></span></div></div>
+      <div class="dscale"><span>00:00</span><span>05:00</span><span>10:00</span><span>15:00</span><span>20:00</span><span>25:00</span><span>30:00</span><span>35:00</span></div>
+    </div>
+  </div>
+</section>
+
+<section id="full">
+  <div class="wrap">
+    <div class="kick rv">Полные ролики</div>
+    <h2 class="rv d1">Посмотреть целиком</h2>
+    <div class="full">
+      <a class="rv" href="https://www.youtube.com/watch?v=DXKWXpKb5tY" target="_blank" rel="noopener"><div class="th"><img src="https://i.ytimg.com/vi/DXKWXpKb5tY/hqdefault.jpg" alt="" loading="lazy"><div class="yt"><i><svg width="18" height="18" viewBox="0 0 24 24" fill="#fff"><path d="M6 4l15 8-15 8z"/></svg></i></div></div><div class="t"><span>медицина · с&nbsp;продажей клуба</span><b>5 привычек, которые помогают похудеть</b></div></a>
+      <a class="rv d1" href="https://www.youtube.com/watch?v=asWhMUyWPJQ" target="_blank" rel="noopener"><div class="th"><img src="https://i.ytimg.com/vi/asWhMUyWPJQ/hqdefault.jpg" alt="" loading="lazy"><div class="yt"><i><svg width="18" height="18" viewBox="0 0 24 24" fill="#fff"><path d="M6 4l15 8-15 8z"/></svg></i></div></div><div class="t"><span>подкаст · медицина</span><b>Эндокринолог: как гормоны влияют на&nbsp;тело</b></div></a>
+      <a class="rv d2" href="https://www.youtube.com/watch?v=gtAQhWnEEno" target="_blank" rel="noopener"><div class="th"><img src="https://i.ytimg.com/vi/gtAQhWnEEno/hqdefault.jpg" alt="" loading="lazy"><div class="yt"><i><svg width="18" height="18" viewBox="0 0 24 24" fill="#fff"><path d="M6 4l15 8-15 8z"/></svg></i></div></div><div class="t"><span>подкаст</span><b>Как снимали документальный сериал</b></div></a>
+    </div>
+  </div>
+</section>
+
+<section id="process">
+  <div class="wrap">
+    <div class="kick rv">Как работаю</div>
+    <h2 class="rv d1">Без сюрпризов по&nbsp;срокам и&nbsp;правкам</h2>
+    <div class="steps">
+      <div class="rv"><b>Бриф</b><p>Сценарий или исходник, референсы, оффер. Сразу говорю сроки и&nbsp;цену.</p></div>
+      <div class="rv d1"><b>Черновой монтаж</b><p>Собираю структуру, убираю провисы, чищу звук. Показываю, чтобы сверить смысл.</p></div>
+      <div class="rv d2"><b>Графика</b><p>Вставки под каждый блок, цвет, субтитры, музыка. Всё в&nbsp;вашем фирменном стиле.</p></div>
+      <div class="rv d3"><b>Правки</b><p>Вношу правки по&nbsp;таймкодам, пока не&nbsp;будет как надо. Отдаю файл и&nbsp;проект.</p></div>
+    </div>
+    <div class="tools rv"><span>DaVinci Resolve</span><span>Premiere Pro</span><span>After Effects</span><span>чистка звука</span><span>цветокоррекция</span><span>субтитры</span></div>
+  </div>
+</section>
+
+<div class="final">
+  <div class="kick rv">Обсудим ваш ролик</div>
+  <h2 class="rv d1">Пришлите сценарий или исходник</h2>
+  <p class="sub rv d2">Посмотрю, скажу сроки и&nbsp;цену. Если есть референсы, тоже кидайте.</p>
+  <div class="cta-row rv d3"><a class="btn hot" href="https://t.me/Ilushkaxr" target="_blank" rel="noopener"><svg class="tg" viewBox="0 0 24 24" fill="currentColor"><path d="M21.9 4.3 18.7 19.4c-.2 1-.9 1.3-1.8.8l-4.9-3.6-2.4 2.3c-.3.3-.5.5-1 .5l.3-5 9.2-8.3c.4-.4-.1-.6-.6-.2L6.1 13 1.2 11.5c-1-.3-1-1 .2-1.5L20.6 2.6c.9-.3 1.6.2 1.3 1.7z"/></svg>Написать в&nbsp;Telegram</a><a class="btn ghost" href="../">Всё портфолио</a></div>
+</div>
+<footer>Илья · монтаж · 2026</footer>
+
+<dialog id="dlg"><div class="mh"><b id="dlgT"></b><button class="x" id="dlgX" aria-label="Закрыть">×</button></div><video id="dlgV" controls playsinline></video></dialog>
+
+<script>
+const STAGES=[
+ ['hook','Хук','Первые секунды решают, останется ли человек. Вопрос в лоб, крупная плашка, смена плана.','«Это про меня, досмотрю»'],
+ ['pain','Боль','Зритель узнаёт свою ситуацию. Его вопрос появляется на экране раньше, чем он успевает его подумать.','«Да, у меня так же»'],
+ ['trust','Доверие','Цифры, площадки, регалии. Не просто говорю, а показываю, почему эксперту можно верить.','«Этот человек знает, что делает»'],
+ ['method','Метод','Сложное раскладываю в схемы, этапы и таблицы. Человек видит путь и понимает, за что платит.','«Понятно, как это работает»'],
+ ['objection','Возражения','Сомнение зрителя проговариваем вслух и закрываем, пока он не ушёл с ролика.','«Ладно, вопрос снят»'],
+ ['offer','Оффер','Цена, состав, бонусы. Карточки и плашки, которые продают спокойно и без крика.','«Недорого за такое»'],
+ ['cta','Призыв','Чёткое действие в конце: куда нажать и что будет дальше.','«Жму кнопку»'],
+];
+const TRICKS=[
+ ['neon','Неоновые слова в интерьере','Ключевое слово загорается прямо в комнате спикера.',''],
+ ['questions','Плашки-вопросы','Вопросы зрителя крупно, в фирменных цветах.',''],
+ ['numbers','Инфографика цифр','Цифра, которую невозможно пропустить.',''],
+ ['mockup','Мокапы сайтов и телефонов','Площадки и пруфы в аккуратных рамках.',''],
+ ['scheme','Схемы и таблицы','Методология из четырёх этапов на одном экране.',''],
+ ['memes','Мемы и юмор','Разряжают длинный монолог, не ломая смысл.',''],
+ ['kinetic','Кинетическая типографика','Текст в ритм речи для тизеров и хуков.',''],
+ ['cards','Соцдоказательства','Отзывы, переписки и материалы клуба, которые вылетают в кадр.',''],
+ ['graph','Графики, которые рисуются','Линия появляется синхронно со словами.',''],
+ ['stock','Стоки по смыслу','Короткая иллюстрация к фразе со световым переходом.',''],
+ ['terms','Термины с пояснением','Сложное слово сразу с расшифровкой.',''],
+ ['guest','Представление спикера','Регалии и проекты эксперта за пару секунд.',''],
+ ['questions2','',''],
+].filter(x=>x[1]);
+const REEL=[['D',5.2,'хук подкаста'],['K',3.8,'вопрос'],['A',3.28,'хук'],['K',4,'боль'],['T',3.2,'неон'],['K',3.8,'цифры'],['K',3.8,'мокап'],['A',4.3,'цифры'],['D',3.4,'типографика'],['K',3.85,'метод'],['K',3.6,'график'],['A',4,'соцдок'],['K',3.8,'таблица'],['D',4.5,'спикер'],['K',3.8,'мемы'],['A',3.8,'термин'],['K',3.8,'пруфы'],['A',5,'оффер'],['D',6.2,'типографика'],['K',4.14,'призыв']];
+const COL={K:'var(--warm)',T:'var(--warm)',A:'var(--mint)',D:'var(--cold)'};
+const LBL={K:'продающий ролик',T:'продающий ролик',A:'медицинский блог',D:'тизер подкаста'};
+const TL=[{"t":60,"d":6},{"t":102,"d":6},{"t":114,"d":6},{"t":168,"d":12},{"t":180,"d":6},{"t":240,"d":6},{"t":372,"d":6},{"t":408,"d":12},{"t":444,"d":12},{"t":456,"d":6},{"t":480,"d":6},{"t":540,"d":12},{"t":582,"d":18},{"t":642,"d":6},{"t":654,"d":6},{"t":684,"d":6},{"t":756,"d":6},{"t":792,"d":6},{"t":816,"d":6},{"t":864,"d":12},{"t":894,"d":24},{"t":936,"d":6},{"t":996,"d":12},{"t":1020,"d":6},{"t":1050,"d":24},{"t":1074,"d":6},{"t":1104,"d":6},{"t":1164,"d":6},{"t":1230,"d":30},{"t":1266,"d":6},{"t":1278,"d":6},{"t":1296,"d":18},{"t":1320,"d":18},{"t":1356,"d":30},{"t":1386,"d":12},{"t":1440,"d":6},{"t":1470,"d":36},{"t":1506,"d":6},{"t":1596,"d":72},{"t":1656,"d":12},{"t":1728,"d":6},{"t":1788,"d":6},{"t":1872,"d":6},{"t":1908,"d":6},{"t":1920,"d":6},{"t":1938,"d":18},{"t":2058,"d":6},{"t":2088,"d":24}];
+const DUR=2098;
+const $=s=>document.querySelector(s);
+const play='<span class="play-ic"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M6 4l15 8-15 8z"/></svg></span>';
+const TITLES={};
+
+// неразрывные пробелы после коротких слов
+const nb=s=>s.replace(/(^|[\s«(])((?:[а-яёА-ЯЁ]{1,2}|без|для|что|как|под|над|при|про|или|это)) /g,'$1$2 ');
+
+// этапы
+const rail=$('#rail');
+STAGES.forEach(([k,t,p,f],i)=>{TITLES[k]=t;rail.insertAdjacentHTML('beforeend',`<article class="stage"><div class="vid" data-k="${k}"><video data-src="media/${k}.mp4" poster="media/${k}.jpg" muted loop playsinline preload="none"></video>${play}</div><div class="body"><div class="no"><b>0${i+1}</b><span>${String(i+1).padStart(2,'0')}/07</span></div><h3>${t}</h3><p>${nb(p)}</p><div class="feel"><span>зритель думает</span>${f}</div></div></article>`)});
+const step=()=>rail.querySelector('.stage').offsetWidth+18;
+$('#next').onclick=()=>rail.scrollBy({left:step(),behavior:'smooth'});
+$('#prev').onclick=()=>rail.scrollBy({left:-step(),behavior:'smooth'});
+rail.addEventListener('scroll',()=>{const m=rail.scrollWidth-rail.clientWidth;$('#railBar').style.width=(m?rail.scrollLeft/m*100:0)+'%'},{passive:true});
+
+// приёмы
+const bento=$('#bento');
+TRICKS.forEach(([k,t,p,c])=>{TITLES[k]=t;bento.insertAdjacentHTML('beforeend',`<div class="cell rv ${c}" data-k="${k}"><div class="v"><video data-src="media/${k}.mp4" poster="media/${k}.jpg" muted loop playsinline preload="none"></video>${play}</div><div class="cap"><b>${nb(t)}</b><span>${nb(p)}</span></div></div>`)});
+TITLES.method='Метод в схеме';TITLES.trust='Цифры';TITLES.proof='Доказательства';
+
+// лупы: играют, когда видны
+const vio=new IntersectionObserver(es=>es.forEach(e=>{const v=e.target;if(e.isIntersecting){if(!v.src)v.src=v.dataset.src;v.play().catch(()=>{})}else v.pause()}),{threshold:.35});
+document.querySelectorAll('video[data-src]').forEach(v=>vio.observe(v));
+
+// модалка со звуком
+const dlg=$('#dlg'),dv=$('#dlgV');
+document.addEventListener('click',e=>{const c=e.target.closest('[data-k]');if(!c)return;$('#dlgT').textContent=TITLES[c.dataset.k]||'';dv.src='media/'+c.dataset.k+'.mp4';dv.muted=false;dlg.showModal();dv.currentTime=0;dv.play().catch(()=>{});rv0.pause()});
+const closeD=()=>{dv.pause();dlg.close()};
+$('#dlgX').onclick=closeD;dlg.addEventListener('click',e=>{if(e.target===dlg)closeD()});dlg.addEventListener('close',()=>{dv.pause();rv0.play().catch(()=>{})});
+
+// шоурил + таймлайн
+const rv0=$('#reel'),tot=REEL.reduce((a,x)=>a+x[1],0);
+const lv=$('#laneV'),la=$('#laneA');let acc=0;const starts=[];
+REEL.forEach(([s,d,n])=>{starts.push(acc);acc+=d;const h=`<div class="seg" style="--d:${d};--c:${COL[s]}" data-n="${n}"></div>`;lv.insertAdjacentHTML('beforeend',h);la.insertAdjacentHTML('beforeend',h)});
+const segs=[...lv.children];
+const fmt=t=>String(Math.floor(t/60)).padStart(2,'0')+':'+String(Math.floor(t%60)).padStart(2,'0');
+function tick(){const D=rv0.duration||tot,t=rv0.currentTime,p=t/D;$('#tlHead').style.left=(p*100)+'%';$('#tlTc').textContent=fmt(t)+' / '+fmt(D);
+  let i=starts.findIndex((s,j)=>t*tot/D>=s&&(j==starts.length-1||t*tot/D<starts[j+1]));segs.forEach((s,j)=>s.classList.toggle('on',j==i));if(i>=0)$('#reelLbl').textContent=LBL[REEL[i][0]];requestAnimationFrame(tick)}
+requestAnimationFrame(tick);
+[lv,la].forEach(l=>l.addEventListener('click',e=>{const r=l.getBoundingClientRect();rv0.currentTime=(e.clientX-r.left)/r.width*(rv0.duration||tot)}));
+function setSnd(on){rv0.muted=!on;$('#sndT').textContent=on?'ЗВУК ВКЛ':'ЗВУК ВЫКЛ';$('#sw').setAttribute('d',on?'M15.5 8.5a5 5 0 0 1 0 7M19 5a10 10 0 0 1 0 14':'m23 9-6 6m0-6 6 6')}
+$('#reelMute').onclick=()=>setSnd(rv0.muted);
+$('#reelSound').onclick=()=>{rv0.currentTime=0;setSnd(true);rv0.play();$('.mon').scrollIntoView({behavior:'smooth',block:'center'})};
+
+// плотность графики
+const dt=$('#dtrack'),dp=$('#dprev');
+TL.forEach(({t,d})=>{const h=35+Math.min(1,d/36)*65;dt.insertAdjacentHTML('beforeend',`<div class="mk" style="left:${t/DUR*100}%;--w:${d/DUR*100}%;--h:${h}%" data-t="${t}"></div>`)});
+dt.addEventListener('mousemove',e=>{const m=e.target.closest('.mk');if(!m){dp.style.opacity=0;return}const t=+m.dataset.t,r=dt.getBoundingClientRect();let x=(t/DUR)*r.width;x=Math.max(dp.offsetWidth/2,Math.min(r.width-dp.offsetWidth/2,x));dp.style.left=x+'px';dp.querySelector('img').src='media/tl/'+t+'.jpg';dp.querySelector('span').textContent=fmt(t);dp.style.opacity=1});
+dt.addEventListener('mouseleave',()=>dp.style.opacity=0);
+
+// появления + верхний плейхед
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{threshold:.12});
+document.querySelectorAll('.rv').forEach(el=>io.observe(el));
+const ph=$('#phHead'),pt=$('#phTc');
+function onS(){const m=document.documentElement.scrollHeight-innerHeight,p=m?scrollY/m:0;ph.style.left=`calc(${p*100}% - ${p*2}px)`;const s=p*81;pt.textContent='00:'+fmt(s)+':'+String(Math.floor(s*25%25)).padStart(2,'0');pt.style.marginLeft=p>.85?'-74px':'8px'}
+addEventListener('scroll',onS,{passive:true});onS();
+</script>
+</body>
+</html>
